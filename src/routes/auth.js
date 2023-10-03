@@ -1,15 +1,16 @@
 const express = require('express');
-const authController = require('../controllers/authController');
+const  AuthController  = require('../controllers/AuthController');
 const router = express.Router();
-const PREFIX = "auth"
 
+const PREFIX = "auth";
 
-router.post(`/${PREFIX}/login`, authController.login);
-router.post(`/${PREFIX}/register`, authController.register);
-router.get(`/${PREFIX}/logout`, authController.logout);
+router.post(`/${PREFIX}/login`, AuthController.login);
+router.post(`/${PREFIX}/register`, AuthController.register);
+router.get(`/${PREFIX}/logout`, AuthController.logout);
 
 router.use(`/${PREFIX}/*`, (req, res, next) => {
     res.status(404).json({ "message": 'Página não encontrada!' });
+    next();
 });
 
 module.exports = router;

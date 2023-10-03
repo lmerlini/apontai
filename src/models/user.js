@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       // aqui podem ser definidas associações
     }
 
-    // Método para verificar senha
     async isValidPassword(password) {
       return bcrypt.compare(password, this.password);
     }

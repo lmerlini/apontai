@@ -1,11 +1,16 @@
 const express = require('express');
-const clientsController = require('../controllers/clientsController');
+const clientsController = require('../controllers/ClientsController');
 
 const router = express.Router();
+const PREFIX = "clients"
 
-router.get('/clients', clientsController.getAllClients);
-router.post('/clients', clientsController.createClient);
-router.delete('/clients', clientsController.deleteClient);
+router.get(`/${PREFIX}`, clientsController.getAllClients);
+router.post(`/${PREFIX}`, clientsController.createClient);
+router.delete(`/${PREFIX}`, clientsController.deleteClient);
+
+router.use(`/${PREFIX}/*`, (req, res, next) => {
+    res.status(404).json({ "message": 'Página não encontrada!' });
+});
 
 module.exports = router;
 

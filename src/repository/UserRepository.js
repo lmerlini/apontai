@@ -3,20 +3,21 @@ const { User } = require('../models');
 class UserRepository {
 
     async findAll() {
-        return await User.findAll()
+        return await User.findAll();
     }
-    async findById(id){
-        return await User.findById(id)
+
+    async findById(id) {
+        return await User.findByPk(id);  
     }
 
     async create(data) {
-        return await User.create(data)
+        return await User.create(data);
     }
 
-    async delete(id) {
+    async destroy(id) {
         return await User.destroy({
             where: { id }
-        })
+        });
     }
 }
 

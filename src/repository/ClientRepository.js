@@ -1,19 +1,23 @@
 const { Client } = require('../models');
 
 class ClientRepository {
-    async findAll() {
-        return await Client.findAll();
+    static async findAll() {
+        return Client.findAll();
     }
 
-    async create(data) {
-        return await Client.create(data);
+    static async create(data) {
+        return Client.create(data);
+    }
+    
+    static async findById(id) {
+        return await Client.findByPk(id);
     }
 
-    async deleteById(id) {
-        return await Client.destroy({
+    static async deleteById(id) {
+        return Client.destroy({
             where: { id }
         });
     }
 }
 
-module.exports = new ClientRepository();
+module.exports = ClientRepository;

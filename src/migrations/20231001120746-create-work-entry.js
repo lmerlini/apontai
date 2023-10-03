@@ -1,5 +1,5 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('WorkEntries', {
@@ -10,7 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       client_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'clients', 
+          key: 'id',
+        },
+        allowNull: false
       },
       service_date: {
         type: Sequelize.DATE
@@ -18,17 +23,14 @@ module.exports = {
       start_time: {
         type: Sequelize.TIME
       },
-      pause_time: {
-        type: Sequelize.TINYINT
+      break_duration: { // Renomeado e tipo modificado
+        type: Sequelize.INTEGER
       },
       end_time: {
         type: Sequelize.TIME
       },
       agenda_description: {
         type: Sequelize.TEXT
-      },
-      daily_total: {
-        type: Sequelize.TIME
       },
       createdAt: {
         allowNull: false,

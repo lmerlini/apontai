@@ -1,49 +1,35 @@
-const passport = require('passport');
-const { User } = require('../models');
+const AuthService = require('../service/AuthService');
 
+class AuthController {
 
-exports.login = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-
-    if (!user) {
-      return res.status(401).send('Unauthorized');;
-    }
-
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
+  static async login(req, res, next) {
+    try {
+      
+      const token = await AuthService.login(req, res);
+      if (token) {
+        return res.json({ message: 'Logged in successfully', token });
+      } else {
+        return res.status(401).send('Unauthorized');
       }
-
-      return res.status(200).send('Logged in successfully');
-    });
-  })(req, res, next);
-};
-
-
-
-exports.logout = (req, res) => {
-  req.logout(() => {
-    res.json({ "message": "success"});
-  });
-};
-
-exports.register = async (req, res, next) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Nome de usuário e senha são obrigatórios!' });
-  }
-
-  try {
-    const user = await User.create({ username, password });
-    return res.json(user);
-  } catch (error) {
-    if (error.name === 'SequelizeUniqueConstraintError') {
-      return res.status(400).json({ message: 'Nome de usuário já está em uso!' });
+    } catch (error) {
+      next(error);
     }
-    next(error);
   }
-};
+
+  static async register(req, res, next) {
+    try {
+      const user = await AuthService.register(req.body);
+      return res.json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static logout(req, res) {
+    AuthService.logout(req);
+    res.json({ "message": "Logged out successfully" });
+  }
+
+}
+
+module.exports = AuthController;

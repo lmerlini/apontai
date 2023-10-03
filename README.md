@@ -18,5 +18,10 @@ etapas de estudos
 
 
 TODOS:
- - criar repository
+ - Refatorar a Passport Para que as Controllers Conhecam Apenas Interfaces
+ - Criar a services (abstrair)
+ - Criar repository
  - implementar JWT
+ -- ENTENDER MELHOR OS  TESTE UNITÁRIAS E TESTES DE INTEGRAÇÃO;
+ -- ENTENDER OS TESTES COM MOCKS DE TESTES;
+
