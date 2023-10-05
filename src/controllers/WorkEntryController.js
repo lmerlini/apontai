@@ -11,6 +11,12 @@ class WorkEntryController {
         }
     }
 
+    static async listTotal(req, res) {
+        const { startDate, endDate } = req.body
+        const totalWork = await WorkEntryService.getTotal(startDate, endDate )
+        res.json(totalWork)
+    }
+
     static async create(req, res) {
         try {
             const { client_id } = req.body
@@ -24,7 +30,7 @@ class WorkEntryController {
 
     static async destroy(req, res) {
         try {
-            const message = await WorkEntryService.delete(req.body.id);
+            const message = await WorkEntryService.destroy(req.body.id);
             res.status(200).json({ message });
         } catch (error) {
             console.error('Erro ao deletar a entrada de trabalho:', error);
@@ -43,7 +49,7 @@ class WorkEntryController {
 
     static async getClientById(req, res) {
         try {
-            const entry = await WorkEntryService.getClientById(req.params.client_id); 
+            const entry = await WorkEntryService.getClientById(req.params.client_id);
             if (entry) {
                 res.json(entry);
             } else {

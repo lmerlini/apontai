@@ -13,6 +13,18 @@ class AuthRepository {
       throw error;
     }
   }
+
+  static async findById(id) {
+    try {
+      const user = await User.findByPk(id);
+      if (!user) {
+        throw new Error('Usuário não encontrado');
+      }
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = AuthRepository;
