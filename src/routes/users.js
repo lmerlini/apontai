@@ -5,7 +5,6 @@ const { getCurrentUser } = require('../controllers/AuthController')
 const PREFIX = "users"
 router.get(`/${PREFIX}/list`, getAllUsers);
 router.delete(`/${PREFIX}/delete`, deleteUser);
-
 router.get(`/${PREFIX}/me`, getCurrentUser)
 
 

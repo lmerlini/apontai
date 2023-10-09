@@ -1,9 +1,10 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const AuthRepository = require('../repository/AuthRepository');
-const UserRepository = require('../repository/UserRepository')
+const UserRepository = require('../repository/UserRepository');
 
 class AuthService {
+
 
 
   static login(req, res) {
@@ -41,22 +42,28 @@ class AuthService {
   }
 
   static async getCurrentUser(token) {
-
-    token = token.split(' ')[1];
-    if (!token) {
-      throw new Error('Token não fornecido');
-    }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(this.hasToken(token), process.env.JWT_SECRET);
     const user = await UserRepository.findById(decoded.id);
 
     if (user) {
-      // TODO: remover alguns dados sensiveis (POR ENQUANTO FOI APENAS PASSWORD)
       delete user.password;
-    }
+    }    
 
     return user;
   }
 
+  static hasToken(token) {
+    return token = token.split(' ')[1];
+  }
+
+  static verifyToken(token) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return true;
+    } catch (error) {
+      throw new Error('Token inválido.');
+    }
+  }
 }
 
 module.exports = AuthService;

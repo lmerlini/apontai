@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const passport = require('./config/passport'); // Lógica de autenticação movida para outro arquivo
+const passport = require('./config/passport'); 
 const { ensureAuthenticated } = require('./middlewares/ensureAuthenticated');
 const cors = require('cors');
 
