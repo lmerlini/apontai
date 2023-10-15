@@ -6,9 +6,10 @@ class AuthController {
   static async login(req, res, next) {
     try {
       // TODO...: Implementar o remember-me com duração maior quando o usuário selecionar
-      const token = await AuthService.login(req, res);
-      if (token) {
-        return res.json({ message: 'Logado com Sucesso', token });
+      const { token, refreshToken } = await AuthService.login(req, res);
+
+      if (token && refreshToken) {
+        return res.status(200).json({ message: 'Logado com Sucesso', token, refreshToken });
       } else {
         return res.status(401).send({ message: 'Não autorizado' });
       }
@@ -26,9 +27,13 @@ class AuthController {
     }
   }
 
-  static logout(req, res) {
-    AuthService.logout(req);
-    res.status(200).json({ message: "Desconectado com sucesso" });
+  static async logout(req, res) {
+    try {
+      await AuthService.logout(req);
+      res.status(200).json({ message: "Desconectado com sucesso" });
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao desconectar" });
+    }
   }
 
   static async getCurrentUser(req, res, next) {
@@ -39,7 +44,7 @@ class AuthController {
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }
 
-      return res.json(user);
+      return res.status(200).json(user);
     } catch (error) {
       next(error);
     }
@@ -52,6 +57,20 @@ class AuthController {
       return res.status(200).json({ message: 'Token válido.' });
     } catch (error) {
       return res.status(401).json({ message: error.message });
+    }
+  }
+
+  static async refreshToken(req, res, next) {
+    try {
+      const { refresh_token } = req.body;
+      if (!refresh_token) {
+        return res.status(400).json({ message: "Refresh token não fornecido" });
+      }
+
+      const newToken = await AuthService.refreshAccessToken(refresh_token);
+      return res.status(200).json({ token: newToken });
+    } catch (error) {
+      next(error);
     }
   }
 }

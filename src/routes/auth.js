@@ -6,8 +6,9 @@ const PREFIX = "auth";
 
 router.post(`/${PREFIX}/login`, AuthController.login);
 router.post(`/${PREFIX}/verify-token`, AuthController.verifyToken);
+router.post(`/${PREFIX}/refresh-token`, AuthController.refreshToken);
 router.post(`/${PREFIX}/register`, AuthController.register);
-router.get(`/${PREFIX}/logout`, AuthController.logout);
+router.post(`/${PREFIX}/logout`, AuthController.logout);
 
 
 router.use(`/${PREFIX}/*`, (req, res, next) => {
