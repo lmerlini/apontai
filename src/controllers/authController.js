@@ -56,7 +56,6 @@ class AuthController {
 
   async verifyToken(req, res) {
     try {
-      console.log(req);
       const token = this.service.hasToken(req.headers['authorization']);
       this.service.verifyToken(token);
       return res.status(200).json({ message: 'Token válido.' });
