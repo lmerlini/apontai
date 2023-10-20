@@ -1,8 +1,8 @@
 const UserService = require('../service/UserService');
 
 class UserController {
-  
-  static async getAllUsers(req, res, next) {
+
+  async getAllUsers(req, res, next) {
     try {
       const users = await UserService.getAllUsers();
       return res.status(200).json(users);
@@ -11,11 +11,11 @@ class UserController {
     }
   }
 
-  static async deleteUser(req, res, next) {
+  async deleteUser(req, res, next) {
     try {
       const { id } = req.body;
       const result = await UserService.deleteUserById(id);
-      
+
       if (result.success) {
         return res.status(200).json({ message: result.message });
       } else {

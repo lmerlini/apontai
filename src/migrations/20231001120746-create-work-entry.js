@@ -12,7 +12,15 @@ module.exports = {
       client_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'clients', 
+          model: 'clients',
+          key: 'id',
+        },
+        allowNull: false
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
           key: 'id',
         },
         allowNull: false
@@ -23,7 +31,7 @@ module.exports = {
       start_time: {
         type: Sequelize.TIME
       },
-      break_duration: { // Renomeado e tipo modificado
+      break_duration: { 
         type: Sequelize.INTEGER
       },
       end_time: {

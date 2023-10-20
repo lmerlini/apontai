@@ -1,11 +1,14 @@
 const { WorkEntry } = require('../models');
 
 class WorkEntryRepository {
-    static async findAll(params = {}) {
-        const results = await WorkEntry.findAll(params);
 
-        //pensei em fazer essa parte no front, será que compensa? 
-        //com ajuda do chatgpt vi que tinha possibildiade de criar um method get na model e aqui eu utilizo
+    constructor() {
+        this.model = WorkEntry
+    }
+
+    async find(params = {}) {
+        const results = await this.model.findAll(params);
+
         return results.map(entry => {
             const plainEntry = entry.get({ plain: true });
             plainEntry.daily_total = entry.daily_total;
@@ -13,23 +16,39 @@ class WorkEntryRepository {
         });
     }
 
-    static async create(data) {
-        return await WorkEntry.create(data);
+    async findByUserId(userId) {
+
+        const results = await this.model.findAll({
+            where: { user_id: userId }
+        });
+
+        return this.generateTotalDaily(results)
     }
 
-    static async deleteById(id) {
-        return await WorkEntry.destroy({
+    async create(data) {
+        return await this.model.create(data);
+    }
+
+    async deleteById(id) {
+        return await this.model.destroy({
             where: { id }
         });
     }
 
-
-    static async updateById(id, data) {
-        const results = await WorkEntry.findByPk(id);
+    async updateById(id, data) {
+        const results = await this.model.findByPk(id);
         if (!results) {
             throw new Error('Work entry not found.');
         }
         return results.update(data);
+    }
+
+    async generateTotalDaily(data) {
+        return await data.map(entry => {
+            const plainEntry = entry.get({ plain: true });
+            plainEntry.daily_total = entry.daily_total;
+            return plainEntry;
+        });
     }
 }
 

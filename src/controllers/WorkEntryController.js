@@ -1,26 +1,37 @@
-const WorkEntryService = require('../service/WorkEntryService');
+const WorkEntryService = require("../service/WorkEntryService");
+
 
 class WorkEntryController {
 
-    static async list(req, res) {
+    constructor() {
+        this.service = new WorkEntryService();
+    }
+
+    async list(req, res) {
         try {
-            const entries = await WorkEntryService.getAll();
+            const { id } = req.user;
+            const entries = await this.service.list(id);
             res.json(entries);
         } catch (error) {
-            res.status(500).json({ message: "Error retrieving work entries." });
+
+            res.status(500).json({ message: 'Erro ao buscar apontamentos.', error: error });
         }
     }
 
-    static async listTotal(req, res) {
+    async listTotal(req, res) {
         const { startDate, endDate } = req.body
-        const totalWork = await WorkEntryService.getTotal(startDate, endDate )
+        const { id } = req.user;
+        const totalWork = await this.service.getTotal(id, startDate, endDate)
         res.json(totalWork)
     }
 
-    static async create(req, res) {
+    async create(req, res) {
         try {
-            const { client_id } = req.body
-            const entry = await WorkEntryService.create(client_id, req.body);
+            const { client_id } = req.body;
+            const { id } = req.user;
+            req.body.user_id = id;
+
+            const entry = await this.service.create(client_id, req.body);
             res.json(entry);
 
         } catch (error) {
@@ -28,9 +39,9 @@ class WorkEntryController {
         }
     }
 
-    static async destroy(req, res) {
+    async destroy(req, res) {
         try {
-            const message = await WorkEntryService.destroy(req.body.id);
+            const message = await this.service.destroy(req.body.id);
             res.status(200).json({ message });
         } catch (error) {
             console.error('Erro ao deletar a entrada de trabalho:', error);
@@ -38,18 +49,18 @@ class WorkEntryController {
         }
     }
 
-    static async update(req, res) {
+    async update(req, res) {
         try {
-            const updatedEntry = await WorkEntryService.update(req.body.id, req.body);
+            const updatedEntry = await this.service.update(req.body.id, req.body);
             res.json(updatedEntry);
         } catch (error) {
             res.status(500).json({ message: "Error updating work entry." });
         }
     }
 
-    static async getClientById(req, res) {
+    async getClientById(req, res) {
         try {
-            const entry = await WorkEntryService.getClientById(req.params.client_id);
+            const entry = await this.service.getClientById(req.params.client_id);
             if (entry) {
                 res.json(entry);
             } else {
