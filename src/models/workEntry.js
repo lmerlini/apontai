@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
         foreignKey: 'client_id',
         as: 'client',
       });
+      this.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'user'
+      });
     }
 
     get daily_total() {
@@ -25,6 +29,13 @@ module.exports = (sequelize) => {
         key: 'id',
       },
       allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'User',
+        key: 'id'
+      }
     },
     service_date: DataTypes.DATE,
     start_time: DataTypes.TIME,

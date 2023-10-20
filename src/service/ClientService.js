@@ -2,12 +2,20 @@ const ClientRepository = require('../repository/ClientRepository');
 
 class ClientService {
 
-    static async getAllClients() {
-        return ClientRepository.findAll();
+    constructor(){
+        this.repositoy = new ClientRepository()
+    }
+
+    async list() {
+        return this.repositoy.find();
+    }
+
+    async findById(client_id) {
+        return this.repositoy.findById(client_id)
     }
 
 
-    static async createClient(clientData) {
+    async create(clientData) {
         //TODO. modificar aqui para permitir informações em branco
         if (clientData?.phone) {
             clientData.phone = clientData.phone.replace(/\D+/g, '');
@@ -17,10 +25,10 @@ class ClientService {
             clientData.cnpj = clientData.cnpj.replace(/\D+/g, '');
         }
 
-        return ClientRepository.create(clientData);
+        return this.repositoy.create(clientData);
     }
 
-    static async updateClient(id, clientData) {
+    async update(id, clientData) {
         if (clientData?.phone) {
             clientData.phone = clientData.phone.replace(/\D+/g, '');
         }
@@ -29,7 +37,7 @@ class ClientService {
             clientData.cnpj = clientData.cnpj.replace(/\D+/g, '');
         }
 
-        const updatedClient = await ClientRepository.updateById(id, clientData);
+        const updatedClient = await this.repositoy.update(id, clientData);
 
         if (!updatedClient) {
             throw new Error('Erro ao atualizar cliente.');
@@ -38,12 +46,21 @@ class ClientService {
         return updatedClient;
     }
 
-    static async deleteClient(id) {
-        const result = await ClientRepository.deleteById(id);
+    async delete(id) {
+        const result = await this.repositoy.delete(id);
         if (result) {
             return 'Cliente deletado com sucesso!';
         } else {
             throw new Error('Erro ao deletar cliente.');
+        }
+    }
+    async deleteClients(ids) {
+
+        const result = await this.repositoy.delete(ids);
+        if (result) {
+            return 'Clientes deletados com sucesso!';
+        } else {
+            throw new Error('Erro ao deletar clientes.');
         }
     }
 }

@@ -1,36 +1,40 @@
-const { Client } = require('../models');
 
+
+const { Client } = require('../models')
 class ClientRepository {
-    static async findAll() {
-        return Client.findAll();
+    constructor(model) {
+        this.model = Client
+    }
+    
+    async find() {
+        return await this.model.findAll();
     }
 
-    static async create(data) {
-        return Client.create(data);
+    async create(data) {
+        return await this.model.create(data);
     }
 
-    static async findById(id) {
-        return await Client.findByPk(id);
+    async findById(id) {
+        return await this.model.findByPk(id);
     }
 
-    static async deleteById(id) {
-        return Client.destroy({
+    async delete(id) {
+        return await this.model.destroy({
             where: { id }
         });
     }
 
-    static async updateById(id, clientData) {
-        try {
-            const client = await this.findById(id); 
-            if (!client) {
-                throw new Error('Cliente não encontrado.');
-            }
-            await client.update(clientData);
-            return true; 
-        } catch (error) {
-            console.error('Erro ao atualizar cliente:', error);
-            return false; // Retorna falso se houver algum erro
+    async update(id, clientData) {
+        const client = await this.findById(id);
+        if (!client) {
+            throw new Error('Cliente não encontrado.');
         }
+
+        await this.model.update(clientData, {
+            where: { id }
+        });
+
+        return await this.findById(id);
     }
 
 }

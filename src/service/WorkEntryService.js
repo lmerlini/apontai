@@ -1,27 +1,36 @@
-const { create, deleteById, findAll, updateById } = require('../repository/WorkEntryRepository');
-const { findById } = require('../repository/ClientRepository');
+const WorkEntryRepository = require('../repository/WorkEntryRepository');
 const { Op } = require('sequelize');
+const ClientService = require('./ClientService');
 
 class WorkEntryService {
 
-    static getAll() {
-        return findAll();
+    constructor() {
+        this.workRepo = new WorkEntryRepository();
+        this.client = new ClientService()
     }
 
-    static async create(client_id, data) {
-        const client = await findById(client_id);
+    async create(client_id, data) {
+
+        // TODO.: REFATORAR CLASSE E INSTANCIA
+
+        const client = await this.client.findById(client_id)
 
         if (!client) {
             throw new Error(`Cliente com ID ${client_id} não existe.`);
         }
 
-        return create(data);
+        return this.workRepo.create(data);
     }
 
-    static async getTotal(startDate, endDate) {
+    async list(userId) {
+        return this.workRepo.findByUserId(userId);
+    }
 
-        let result = await findAll({
+    async getTotal(userId, startDate, endDate) {
+
+        let result = await this.workRepo.find({
             where: {
+                user_id: userId,
                 service_date:
                 {
                     [Op.between]: [new Date(startDate), new Date(endDate)]
@@ -32,9 +41,9 @@ class WorkEntryService {
         return result
     }
 
-    static async destroy(id) {
+    async destroy(id) {
 
-        const result = await deleteById(id);
+        const result = await this.workRepo.deleteById(id);
         if (result) {
             return 'Entrada de trabalho deletada com sucesso!';
         } else {
@@ -42,18 +51,17 @@ class WorkEntryService {
         }
     }
 
-    static update(id, entryData) {
-        return updateById(id, entryData);
+    update(id, entryData) {
+        return this.workRepo.updateById(id, entryData);
     }
 
-    static async getClientById(id) {
+    async getClientById(id) {
 
-        return await findAll({
+        return await this.workRepo.findAll({
             where: { client_id: id }
         });
     }
 
 }
-
 
 module.exports = WorkEntryService;

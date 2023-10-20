@@ -7,14 +7,15 @@ require('dotenv').config();
 
 class AuthService {
 
-
-  static login(req, res) {
+  login(req, res) {
+    console.log(req);
     return new Promise((resolve, reject) => {
       passport.authenticate('local', async (err, user) => {
 
         if (err) {
           reject(err);
         }
+
 
         if (!user) {
           resolve(null);
@@ -26,7 +27,7 @@ class AuthService {
           }
 
           const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-            expiresIn: '20m' 
+            expiresIn: '20m'
           });
 
           const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_SECRET, {
@@ -46,11 +47,11 @@ class AuthService {
     });
   }
 
-  static generateAccessToken(payload) {
+  generateAccessToken(payload) {
     return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' });
   }
 
-  static async verifyRefreshToken(refreshToken) {
+  async verifyRefreshToken(refreshToken) {
     const storedToken = await TokenRepository.getTokenByValue(refreshToken);
     if (!storedToken) throw new Error("Refresh token not found");
 
@@ -58,16 +59,16 @@ class AuthService {
     return storedToken;
   }
 
-  static getNewAccessToken(refreshToken) {
+  getNewAccessToken(refreshToken) {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
     return this.generateAccessToken({ id: decoded.id });
   }
 
-  static async register(userData) {
+  async register(userData) {
     return AuthRepository.createUser(userData);
   }
 
-  static logout(req) {
+  logout(req) {
     return new Promise((resolve, reject) => {
       req.logout((err) => {
         if (err) reject(err);
@@ -76,7 +77,7 @@ class AuthService {
     });
   }
 
-  static async getCurrentUser(token) {
+  async getCurrentUser(token) {
     const decoded = jwt.verify(this.hasToken(token), process.env.JWT_SECRET);
     const user = await UserRepository.findById(decoded.id);
 
@@ -87,11 +88,11 @@ class AuthService {
     return user;
   }
 
-  static hasToken(token) {
+  hasToken(token) {
     return token = token.split(' ')[1];
   }
 
-  static async refreshAccessToken(refreshToken) {
+  async refreshAccessToken(refreshToken) {
     try {
       await this.verifyRefreshToken(refreshToken); // Verifica se o refreshToken é válido
       return this.getNewAccessToken(refreshToken); // Retorna um novo accessToken
@@ -100,7 +101,7 @@ class AuthService {
     }
   }
 
-  static verifyToken(token) {
+  verifyToken(token) {
     try {
       jwt.verify(token, process.env.JWT_SECRET);
       return true;

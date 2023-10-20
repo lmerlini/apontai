@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
 
     static associate(models) {
-      // aqui podem ser definidas associações
+      this.hasMany(models.WorkEntry, { foreignKey: 'user_id', as: 'workEntries' });
     }
 
     async isValidPassword(password) {
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
 
-  
+
 
   return User;
 };
