@@ -2,20 +2,21 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const AuthRepository = require('../repository/AuthRepository');
 const UserRepository = require('../repository/UserRepository');
-const TokenRepository = require('../repository/TokenRepository')
+
 require('dotenv').config();
 
 class AuthService {
 
   login(req, res) {
-    console.log(req);
+    const isProduction = process.env.NODE_ENV === 'production';
+    const tokenExpiry = isProduction ? '20m' : '9999y';
+    const refreshTokenExpiry = isProduction ? '7d' : '9999y';
     return new Promise((resolve, reject) => {
       passport.authenticate('local', async (err, user) => {
-
+        
         if (err) {
           reject(err);
         }
-
 
         if (!user) {
           resolve(null);
@@ -26,19 +27,12 @@ class AuthService {
             reject(err);
           }
 
-          const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-            expiresIn: '20m'
+          const token = jwt.sign({ id: user.id, name: user.name, device: req.headers['user-agent'] }, process.env.JWT_SECRET, {
+            expiresIn: tokenExpiry
           });
 
-          const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_SECRET, {
-            expiresIn: '7d'
-          });
-
-          // Armazenar refresh token no banco de dados
-          await TokenRepository.createToken({
-            userId: user.id,
-            token: refreshToken,
-            expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+          const refreshToken = jwt.sign({ id: user.id, name: user.name, device: req.headers['user-agent'] }, process.env.JWT_REFRESH_SECRET, {
+            expiresIn: refreshTokenExpiry
           });
 
           resolve({ token, refreshToken });
@@ -52,11 +46,7 @@ class AuthService {
   }
 
   async verifyRefreshToken(refreshToken) {
-    const storedToken = await TokenRepository.getTokenByValue(refreshToken);
-    if (!storedToken) throw new Error("Refresh token not found");
-
-    jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-    return storedToken;
+    return jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
   }
 
   getNewAccessToken(refreshToken) {
@@ -71,8 +61,13 @@ class AuthService {
   logout(req) {
     return new Promise((resolve, reject) => {
       req.logout((err) => {
-        if (err) reject(err);
-        else resolve();
+
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve();
+        }
       });
     });
   }
@@ -89,13 +84,31 @@ class AuthService {
   }
 
   hasToken(token) {
-    return token = token.split(' ')[1];
+    if (!token) {
+      throw new Error('Token não fornecido.');
+    }
+    const parts = token.split(' ')
+
+    if (parts.length !== 2) {
+      throw new Error('Formato de token inválido.');
+    }
+
+    const scheme = parts[0];
+    const jwtToken = parts[1];
+
+    if (!/^Bearer$/i.test(scheme)) {
+      throw new Error('Formato do token malformatado.');
+    }
+
+    console.log(jwtToken)
+
+    return jwtToken;
   }
 
   async refreshAccessToken(refreshToken) {
     try {
-      await this.verifyRefreshToken(refreshToken); // Verifica se o refreshToken é válido
-      return this.getNewAccessToken(refreshToken); // Retorna um novo accessToken
+      await this.verifyRefreshToken(refreshToken);
+      return this.getNewAccessToken(refreshToken);
     } catch (error) {
       throw new Error("Refresh token inválido ou expirado");
     }
@@ -106,7 +119,7 @@ class AuthService {
       jwt.verify(token, process.env.JWT_SECRET);
       return true;
     } catch (error) {
-      throw new Error('Token inválido.');
+      throw new Error("Refresh token inválido ou expirado");
     }
   }
 }
