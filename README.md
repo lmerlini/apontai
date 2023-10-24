@@ -19,9 +19,9 @@ etapas de estudos
 
 TODOS:
  - Refatorar a Passport Para que as Controllers Conhecam Apenas Interfaces
- - Criar a services (abstrair)
- - Criar repository
- - implementar JWT
+ - Criar a services (abstrair) [no]
+ - Criar repository [ok]
+ - implementar JWT [ok]
  -- ENTENDER MELHOR OS  TESTE UNITÁRIAS E TESTES DE INTEGRAÇÃO;
  -- ENTENDER OS TESTES COM MOCKS DE TESTES;
 

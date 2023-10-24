@@ -6,8 +6,7 @@
   "scripts": {
     "start": "concurrently \"redis-server\" \"nodemon src/app.js\"",
     "db:refresh": "sequelize-cli db:migrate:undo:all && sequelize-cli db:migrate && sequelize-cli db:seed:all",
-    "db:seed": "sequelize-cli  sequelize-cli db:seed:all",
-    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate": "sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "test": "jest"
   },
   "keywords": [],
