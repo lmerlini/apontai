@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       allowNull: false
     },
-    firstname: {
+    first_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    lasname: {
+    last_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -44,6 +44,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    tableName: 'users', 
+    freezeTableName: true
   });
 
 

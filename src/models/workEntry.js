@@ -46,6 +46,8 @@ module.exports = (sequelize) => {
   }, {
     sequelize,
     modelName: 'WorkEntry',
+    tableName: 'workentries', 
+    freezeTableName: true
   });
 
   return WorkEntry;

@@ -17,8 +17,8 @@ class AuthController {
       } else {
         return res.status(401).send({ message: 'Não autorizado' });
       }
-    } catch (error) {      
-      res.status(500).json({ mesage: "Erro ao desconectar", error: error });
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao efetuar login" });
     }
   }
 
@@ -27,7 +27,7 @@ class AuthController {
       const user = await this.service.register(req.body);
       return res.json(user);
     } catch (error) {
-      res.status(500).json({ mesage: "Erro ao desconectar", error: error });
+      res.status(500).json({ message: "Erro ao efetuar o registro do usuário" });
     }
   }
 
@@ -40,7 +40,7 @@ class AuthController {
     }
   }
 
-  async getCurrentUser(req, res, next) {
+  async getCurrentUser(req, res) {
     try {
       const user = await this.service.getCurrentUser(req.headers['authorization']);
 
@@ -50,7 +50,7 @@ class AuthController {
 
       return res.status(200).json(user);
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: "Erro ao retornar dados do usuário" });
     }
   }
 
@@ -74,7 +74,7 @@ class AuthController {
       const newToken = await this.service.refreshAccessToken(refresh_token);
       return res.status(200).json({ token: newToken });
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: "Erro ao atualizar o token!" });
     }
   }
 }
