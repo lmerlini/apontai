@@ -12,14 +12,15 @@ class AuthService {
     const tokenExpiry = isProduction ? '20m' : '9999y';
     const refreshTokenExpiry = isProduction ? '7d' : '9999y';
     return new Promise((resolve, reject) => {
-      passport.authenticate('local', async (err, user) => {
-        
+      passport.authenticate('local', async (err, user) => {      
+
         if (err) {
           reject(err);
         }
 
         if (!user) {
           resolve(null);
+          return;
         }
 
         req.logIn(user, async (err) => {

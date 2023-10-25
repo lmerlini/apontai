@@ -11,6 +11,7 @@ class Authenticate {
 
     initializeRoutes() {
         const PREFIX = "auth";
+        
         this.router.post(`/${PREFIX}/login`, (req, res, next) => this.controller.login(req, res, next));
         this.router.post(`/${PREFIX}/verify-token`, (req, res, next) => this.controller.verifyToken(req, res, next));
         this.router.post(`/${PREFIX}/refresh-token`, (req, res, next) => this.controller.refreshToken(req, res, next));
