@@ -1,6 +1,5 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
-/** @type {import('sequelize').Model} */
 
 module.exports = (sequelize) => {
     class Accountable extends Model {
@@ -36,8 +35,7 @@ module.exports = (sequelize) => {
         phone: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        deletedAt: DataTypes.DATE
+        }
     },
         {
             sequelize,

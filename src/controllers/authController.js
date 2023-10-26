@@ -1,12 +1,26 @@
 const AuthService = require('../service/AuthService');
 const jwt = require('jsonwebtoken');
 
+/**
+ * Controller for handling authentication and authorization requests.
+ */
 class AuthController {
 
+  /**
+   * Constructs the AuthController and initializes the authentication service.
+   * @constructor 
+   * @see AuthService
+   */
   constructor() {
-    this.service = new AuthService()
+    this.service = new AuthService();
   }
 
+  /**
+   * Handles the login request.
+   * @async
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   */
   async login(req, res) {
     try {
       const { token, refreshToken } = await this.service.login(req, res);
@@ -21,6 +35,12 @@ class AuthController {
     }
   }
 
+  /**
+   * Handles the user registration request.
+   * @async
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   */
   async register(req, res) {
     try {
       const user = await this.service.register(req.body);
@@ -30,6 +50,12 @@ class AuthController {
     }
   }
 
+  /**
+   * Handles the logout request.
+   * @async
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   */
   async logout(req, res) {
     try {
       await this.service.logout(req);
@@ -39,20 +65,30 @@ class AuthController {
     }
   }
 
+  /**
+   * Retrieves the current authenticated user's information.
+   * @async
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   */
   async getCurrentUser(req, res) {
     try {
       const user = await this.service.getCurrentUser(req.headers['authorization']);
-      console.log(user);
       if (!user) {
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }
-
       return res.status(200).json(user);
     } catch (error) {
       res.status(500).json({ message: "Erro ao retornar dados do usuário" });
     }
   }
 
+  /**
+   * Verifies the validity of a provided JWT token.
+   * @async
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   */
   async verifyToken(req, res) {
     try {
       const token = this.service.hasToken(req.headers['authorization']);
@@ -63,6 +99,12 @@ class AuthController {
     }
   }
 
+  /**
+   * Handles the token refresh request to get a new JWT token.
+   * @async
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   */
   async refreshToken(req, res) {
     try {
       const { refresh_token } = req.body;
@@ -78,4 +120,8 @@ class AuthController {
   }
 }
 
+/**
+ * Exports the AuthController class.
+ * @module AuthController
+ */
 module.exports = AuthController;

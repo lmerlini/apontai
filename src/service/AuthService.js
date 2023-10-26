@@ -7,12 +7,18 @@ require('dotenv').config();
 
 class AuthService {
 
+  /**
+  * Authenticate a user and generate access and refresh tokens.
+  * @param {Object} req - The request object.
+  * @param {Object} res - The response object.
+  * @returns {Promise<Object>} An object containing the access and refresh tokens.
+  */
   login(req, res) {
     const isProduction = process.env.NODE_ENV === 'production';
     const tokenExpiry = isProduction ? '20m' : '9999y';
     const refreshTokenExpiry = isProduction ? '7d' : '9999y';
     return new Promise((resolve, reject) => {
-      passport.authenticate('local', async (err, user) => {      
+      passport.authenticate('local', async (err, user) => {
 
         if (err) {
           reject(err);
@@ -42,23 +48,48 @@ class AuthService {
     });
   }
 
+  /**
+   * Generate a new access token.
+   * @param {Object} payload - The payload to be encoded into the token.
+   * @returns {string} A JWT access token.
+   */
   generateAccessToken(payload) {
     return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' });
   }
 
+  /**
+   * Verify the validity of a refresh token.
+   * @param {string} refreshToken - The refresh token to verify.
+   * @returns {Object} The decoded JWT payload.
+   */
   async verifyRefreshToken(refreshToken) {
     return jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
   }
 
+  /**
+   * Generate a new access token using a refresh token.
+   * @param {string} refreshToken - The refresh token.
+   * @returns {string} A new JWT access token.
+   */
   getNewAccessToken(refreshToken) {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
     return this.generateAccessToken({ id: decoded.id });
   }
 
+  /**
+   * Register a new user. 
+  * @param {Object} userData - The data of the user to be registered.
+  * @returns {Promise<Object>} The created user object.
+  */
   async register(userData) {
     return AuthRepository.createUser(userData);
   }
 
+  /**
+   * Log out the authenticated user.
+   * @param {Object} req - The request object.
+   * @returns {Promise} Resolves when the logout operation is completed.
+   */
   logout(req) {
     return new Promise((resolve, reject) => {
       req.logout((err) => {
@@ -73,6 +104,11 @@ class AuthService {
     });
   }
 
+  /**
+   * Retrieve the current authenticated user's information using a token.
+   * @param {string} token - The JWT access token.
+   * @returns {Promise<Object>} The authenticated user object.
+   */
   async getCurrentUser(token) {
     const decoded = jwt.verify(this.hasToken(token), process.env.JWT_SECRET);
     const user = await UserRepository.findById(decoded.id);
@@ -84,6 +120,11 @@ class AuthService {
     return user;
   }
 
+  /**
+   * Extract and validate the JWT token from the authorization header.
+   * @param {string} token - The authorization header containing the token.
+   * @returns {string} The JWT token.
+   */
   hasToken(token) {
     if (!token) {
       throw new Error('Token não fornecido.');
@@ -106,6 +147,11 @@ class AuthService {
     return jwtToken;
   }
 
+  /**
+   * Refresh the access token using a provided refresh token.
+   * @param {string} refreshToken - The refresh token.
+   * @returns {string} A new JWT access token.
+   */
   async refreshAccessToken(refreshToken) {
     try {
       await this.verifyRefreshToken(refreshToken);
@@ -115,6 +161,11 @@ class AuthService {
     }
   }
 
+  /**
+  * Verify the validity of a provided JWT token.
+  * @param {string} token - The JWT token to verify.
+  * @returns {boolean} True if the token is valid, throws an error otherwise.
+  */
   verifyToken(token) {
     try {
       jwt.verify(token, process.env.JWT_SECRET);
@@ -125,4 +176,8 @@ class AuthService {
   }
 }
 
+/**
+ * Exports the AuthService class.
+ * @module AuthService
+ */
 module.exports = AuthService;
