@@ -2,12 +2,12 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-/** @type {import('sequelize').Model} */
+
 module.exports = (sequelize) => {
   class User extends Model {
 
     static associate(models) {
-      this.hasMany(models.Work, { foreignKey: 'user_id', as: 'works' }); // ajustado aqui
+      this.hasMany(models.Work, { foreignKey: 'user_id', as: 'works' }); 
     }
 
     async isValidPassword(password) {

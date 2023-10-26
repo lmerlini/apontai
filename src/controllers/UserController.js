@@ -1,20 +1,40 @@
 const UserService = require('../service/UserService');
 
+/**
+ * Controller for user-related operations.
+ */
 class UserController {
 
-  async getAllUsers(req, res, next) {
+  constructor() {
+    this.service = new UserService()
+  }
+  /**
+  * Retrieves all users from the database.
+  * 
+  * @param {express.Request} req - Express request object.
+  * @param {express.Response} res - Express response object.
+  * @returns {express.Response} - Response object with the status and the list of users or error message.
+  */
+  async getAllUsers(req, res) {
     try {
-      const users = await UserService.getAllUsers();
+      const users = await this.service.getAllUsers();
       return res.status(200).json(users);
     } catch (error) {
-      next(new Error('Erro ao buscar usuários.'));
+      return res.status(500).json({ message: 'Erro ao buscar usuários.', error: error });
     }
   }
 
-  async deleteUser(req, res, next) {
+  /**
+   * Deletes a user by ID.
+   * 
+   * @param {express.Request} req - Express request object.
+   * @param {express.Response} res - Express response object.
+   * @returns {express.Response} - Response object with the status and success or error message.
+   */
+  async deleteUser(req, res) {
     try {
       const { id } = req.body;
-      const result = await UserService.deleteUserById(id);
+      const result = await this.service.deleteUserById(id);
 
       if (result.success) {
         return res.status(200).json({ message: result.message });
@@ -22,10 +42,13 @@ class UserController {
         return res.status(404).json({ message: result.message });
       }
     } catch (error) {
-      console.error('Erro ao deletar o usuário:', error);
       return res.status(500).json({ message: 'Erro ao deletar o usuário.' });
     }
   }
 }
 
+/**
+ * Exporting an instance of UserController for user-related operations.
+ * @type {UserController}
+ */
 module.exports = UserController;

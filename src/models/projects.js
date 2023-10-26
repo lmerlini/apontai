@@ -36,7 +36,8 @@ module.exports = (sequelize) => {
         sequelize,
         modelName: 'Project',
         tableName: 'projects',
-        freezeTableName: true
+        freezeTableName: true,
+        paranoid: true
     });
 
     return Project;

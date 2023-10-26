@@ -1,7 +1,6 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
 
-/** @type {import('sequelize').Model} */
 module.exports = (sequelize) => {
   class Work extends Model {
     static associate(models) {
@@ -56,8 +55,7 @@ module.exports = (sequelize) => {
     description: DataTypes.TEXT,
     status: DataTypes.STRING,
     createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
-    deletedAt: DataTypes.DATE
+    updatedAt: DataTypes.DATE    
 
   }, {
     sequelize,

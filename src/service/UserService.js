@@ -1,13 +1,17 @@
 const UserRepository = require('../repository/UserRepository');
 
 class UserService {
-  
-  static async getAllUsers() {
-    return await UserRepository.findAll();
+
+  constructor() {
+    this.repository = new UserRepository()
   }
 
-  static async deleteUserById(id) {
-    const result = await UserRepository.delete(id);
+  async getAllUsers() {
+    return await this.repository.findAll();
+  }
+
+  async deleteUserById(id) {
+    const result = await this.repository.delete(id);
     if (result) {
       return { success: true, message: 'Usuário deletado com sucesso!' };
     } else {

@@ -1,0 +1,20 @@
+{
+    "source": {
+      "include": [
+        "src/config",
+        "src/middlewares",
+        "src/app.js",
+        "src/routes",
+        "src/controllers",
+        "src/service",
+        "src/repository",
+        "src/models"
+      ], 
+      "includePattern": ".js$"
+    },
+    "opts": {
+      "destination": "./documentation/" ,
+      "template": "node_modules/docdash"      
+    }    
+  }
+  
