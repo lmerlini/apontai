@@ -19,6 +19,7 @@ for (const file of modelFiles) {
     db[model.name] = model;
 }
 
+
 for (const modelName in db) {
     if (db[modelName].associate) {
         db[modelName].associate(db);

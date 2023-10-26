@@ -1,14 +1,13 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-module.exports = (sequelize, DataTypes) => {
+/** @type {import('sequelize').Model} */
+module.exports = (sequelize) => {
   class User extends Model {
 
     static associate(models) {
-      this.hasMany(models.WorkEntry, { foreignKey: 'user_id', as: 'workEntries' });
+      this.hasMany(models.Work, { foreignKey: 'user_id', as: 'works' }); // ajustado aqui
     }
 
     async isValidPassword(password) {
@@ -32,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
     password: {
       type: DataTypes.STRING,
@@ -44,11 +45,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
-    tableName: 'users', 
-    freezeTableName: true
+    tableName: 'users',
+    freezeTableName: true,
+    timestamps: true,
+    paranoid: true
   });
-
-
 
   return User;
 };

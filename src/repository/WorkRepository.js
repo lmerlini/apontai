@@ -1,9 +1,9 @@
-const { WorkEntry } = require('../models');
+const { Work } = require('../models');
 
-class WorkEntryRepository {
+class WorkRepository {
 
     constructor() {
-        this.model = WorkEntry
+        this.model = Work
     }
 
     async find(params = {}) {
@@ -38,7 +38,7 @@ class WorkEntryRepository {
     async updateById(id, data) {
         const results = await this.model.findByPk(id);
         if (!results) {
-            throw new Error('Work entry not found.');
+            return null
         }
         return results.update(data);
     }
@@ -52,4 +52,4 @@ class WorkEntryRepository {
     }
 }
 
-module.exports = WorkEntryRepository;
+module.exports = WorkRepository;

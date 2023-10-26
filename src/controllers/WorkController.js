@@ -1,10 +1,10 @@
-const WorkEntryService = require("../service/WorkEntryService");
+const WorkService = require("../service/WorkService");
 
 
-class WorkEntryController {
+class WorkController {
 
     constructor() {
-        this.service = new WorkEntryService();
+        this.service = new WorkService();
     }
 
     async list(req, res) {
@@ -73,4 +73,4 @@ class WorkEntryController {
 
 }
 
-module.exports = WorkEntryController;
+module.exports = WorkController;

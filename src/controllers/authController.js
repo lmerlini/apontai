@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 
 class AuthController {
 
-
   constructor() {
     this.service = new AuthService()
   }
@@ -22,7 +21,7 @@ class AuthController {
     }
   }
 
-  async register(req, res, next) {
+  async register(req, res) {
     try {
       const user = await this.service.register(req.body);
       return res.json(user);
@@ -43,7 +42,7 @@ class AuthController {
   async getCurrentUser(req, res) {
     try {
       const user = await this.service.getCurrentUser(req.headers['authorization']);
-
+      console.log(user);
       if (!user) {
         return res.status(404).json({ error: 'Usuário não encontrado' });
       }
@@ -64,7 +63,7 @@ class AuthController {
     }
   }
 
-  async refreshToken(req, res, next) {
+  async refreshToken(req, res) {
     try {
       const { refresh_token } = req.body;
       if (!refresh_token) {

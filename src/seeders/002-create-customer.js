@@ -2,13 +2,12 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('clients', [{
+    return queryInterface.bulkInsert('customers', [{
       name: 'Empresa ABC',
       phone: '1122334455',
       cnpj: '12.345.678/0001-90',
-      responsible: 'João Silva',
+      contact: 'João Silva',
       email: 'joao.silva@empresaabc.com',
-      hourrate: 50,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -16,15 +15,14 @@ module.exports = {
       name: 'Empresa XYZ',
       phone: '9988776655',
       cnpj: '98.765.432/0001-10',
-      responsible: 'Maria Pereira',
+      contact: 'Maria Pereira',
       email: 'maria.pereira@empresaxyz.com',
-      hourrate: 60,
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('clients', null, {});
+    return queryInterface.bulkDelete('customers', null, {});
   }
 };

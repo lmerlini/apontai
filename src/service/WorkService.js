@@ -1,24 +1,21 @@
-const WorkEntryRepository = require('../repository/WorkEntryRepository');
+const WorkRepository = require('../repository/WorkRepository');
 const { Op } = require('sequelize');
-const ClientService = require('./ClientService');
+const CustomerService = require('./CustomerService');
 
-class WorkEntryService {
+//TODO: falta criar os middlewares para erros
+class WorkService {
 
     constructor() {
-        this.workRepo = new WorkEntryRepository();
-        this.client = new ClientService()
+        this.workRepo = new WorkRepository();
+        this.customer = new CustomerService()
     }
 
-    async create(client_id, data) {
+    async create(customer_id, data) {
+        const customer = await this.customer.findById(customer_id)
 
-        // TODO.: REFATORAR CLASSE E INSTANCIA
-
-        const client = await this.client.findById(client_id)
-
-        if (!client) {
-            throw new Error(`Cliente com ID ${client_id} não existe.`);
+        if (!customer) {
+            throw new Error(`Cliente com ID ${customer_id} não existe.`);
         }
-
         return this.workRepo.create(data);
     }
 
@@ -27,7 +24,6 @@ class WorkEntryService {
     }
 
     async getTotal(userId, startDate, endDate) {
-
         let result = await this.workRepo.find({
             where: {
                 user_id: userId,
@@ -37,7 +33,6 @@ class WorkEntryService {
                 }
             }
         })
-
         return result
     }
 
@@ -52,7 +47,12 @@ class WorkEntryService {
     }
 
     update(id, entryData) {
-        return this.workRepo.updateById(id, entryData);
+        const result = this.workRepo.updateById(id, entryData);
+        if (result) {
+            return result
+        } else {
+            throw new Error(`Não foi possível alterar, tente novamente!`);
+        }
     }
 
     async getClientById(id) {
@@ -64,4 +64,4 @@ class WorkEntryService {
 
 }
 
-module.exports = WorkEntryService;
+module.exports = WorkService;

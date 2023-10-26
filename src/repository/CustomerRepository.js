@@ -1,11 +1,10 @@
+const { Customer } = require('../models')
 
-
-const { Client } = require('../models')
-class ClientRepository {
-    constructor(model) {
-        this.model = Client
+class CustomerRepository {
+    constructor() {
+        this.model = Customer
     }
-    
+
     async find() {
         return await this.model.findAll();
     }
@@ -39,4 +38,4 @@ class ClientRepository {
 
 }
 
-module.exports = ClientRepository;
+module.exports = CustomerRepository;
