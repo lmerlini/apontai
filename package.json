@@ -7,7 +7,7 @@
     "start": "concurrently \"redis-server\" \"nodemon src/app.js\"",
     "db:refresh": "sequelize-cli db:migrate:undo:all && sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "db:migrate": "sequelize-cli db:migrate && sequelize-cli db:seed:all",
-    "generate-docs": "jsdoc -c jsdoc.json -R README.md",
+    "generate-docs": "jsdoc -c jsdoc.json",
     "test": "jest"
   },
   "keywords": [],

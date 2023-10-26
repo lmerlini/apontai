@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>service/AuthService.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthController.html">AuthController</a><ul class='methods'><li data-type='method'><a href="AuthController.html#getCurrentUser">getCurrentUser</a></li><li data-type='method'><a href="AuthController.html#login">login</a></li><li data-type='method'><a href="AuthController.html#logout">logout</a></li><li data-type='method'><a href="AuthController.html#refreshToken">refreshToken</a></li><li data-type='method'><a href="AuthController.html#register">register</a></li><li data-type='method'><a href="AuthController.html#verifyToken">verifyToken</a></li></ul></li><li><a href="AuthRepository.html">AuthRepository</a><ul class='methods'><li data-type='method'><a href="AuthRepository.html#.createUser">createUser</a></li><li data-type='method'><a href="AuthRepository.html#.findById">findById</a></li></ul></li><li><a href="Authenticate.html">Authenticate</a><ul class='methods'><li data-type='method'><a href="Authenticate.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="CustomerController.html">CustomerController</a><ul class='methods'><li data-type='method'><a href="CustomerController.html#create">create</a></li><li data-type='method'><a href="CustomerController.html#delete">delete</a></li><li data-type='method'><a href="CustomerController.html#deleteClients">deleteClients</a></li><li data-type='method'><a href="CustomerController.html#list">list</a></li><li data-type='method'><a href="CustomerController.html#update">update</a></li></ul></li><li><a href="CustomerRepository.html">CustomerRepository</a><ul class='methods'><li data-type='method'><a href="CustomerRepository.html#create">create</a></li><li data-type='method'><a href="CustomerRepository.html#delete">delete</a></li><li data-type='method'><a href="CustomerRepository.html#find">find</a></li><li data-type='method'><a href="CustomerRepository.html#findById">findById</a></li><li data-type='method'><a href="CustomerRepository.html#update">update</a></li></ul></li><li><a href="CustomerRoutes.html">CustomerRoutes</a><ul class='methods'><li data-type='method'><a href="CustomerRoutes.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="CustomerService.html">CustomerService</a><ul class='methods'><li data-type='method'><a href="CustomerService.html#create">create</a></li><li data-type='method'><a href="CustomerService.html#delete">delete</a></li><li data-type='method'><a href="CustomerService.html#deleteClients">deleteClients</a></li><li data-type='method'><a href="CustomerService.html#findById">findById</a></li><li data-type='method'><a href="CustomerService.html#list">list</a></li><li data-type='method'><a href="CustomerService.html#update">update</a></li></ul></li><li><a href="UserController.html">UserController</a><ul class='methods'><li data-type='method'><a href="UserController.html#deleteUser">deleteUser</a></li><li data-type='method'><a href="UserController.html#getAllUsers">getAllUsers</a></li></ul></li><li><a href="UserRepository.html">UserRepository</a><ul class='methods'><li data-type='method'><a href="UserRepository.html#create">create</a></li><li data-type='method'><a href="UserRepository.html#delete">delete</a></li><li data-type='method'><a href="UserRepository.html#findAll">findAll</a></li><li data-type='method'><a href="UserRepository.html#findById">findById</a></li></ul></li><li><a href="UserRouter.html">UserRouter</a><ul class='methods'><li data-type='method'><a href="UserRouter.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="WorkController.html">WorkController</a><ul class='methods'><li data-type='method'><a href="WorkController.html#create">create</a></li><li data-type='method'><a href="WorkController.html#destroy">destroy</a></li><li data-type='method'><a href="WorkController.html#getClientById">getClientById</a></li><li data-type='method'><a href="WorkController.html#list">list</a></li><li data-type='method'><a href="WorkController.html#listTotal">listTotal</a></li><li data-type='method'><a href="WorkController.html#update">update</a></li></ul></li><li><a href="WorkRepository.html">WorkRepository</a><ul class='methods'><li data-type='method'><a href="WorkRepository.html#create">create</a></li><li data-type='method'><a href="WorkRepository.html#deleteById">deleteById</a></li><li data-type='method'><a href="WorkRepository.html#find">find</a></li><li data-type='method'><a href="WorkRepository.html#findByUserId">findByUserId</a></li><li data-type='method'><a href="WorkRepository.html#generateTotalDaily">generateTotalDaily</a></li><li data-type='method'><a href="WorkRepository.html#updateById">updateById</a></li></ul></li><li><a href="WorkRoutes.html">WorkRoutes</a><ul class='methods'><li data-type='method'><a href="WorkRoutes.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="WorkService.html">WorkService</a><ul class='methods'><li data-type='method'><a href="WorkService.html#create">create</a></li><li data-type='method'><a href="WorkService.html#destroy">destroy</a></li><li data-type='method'><a href="WorkService.html#getClientById">getClientById</a></li><li data-type='method'><a href="WorkService.html#getTotal">getTotal</a></li><li data-type='method'><a href="WorkService.html#list">list</a></li><li data-type='method'><a href="WorkService.html#update">update</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-AuthController.html">AuthController</a></li><li><a href="module-AuthRepository.html">AuthRepository</a></li><li><a href="module-AuthService.html">AuthService</a></li><li><a href="module-CustomerController.html">CustomerController</a></li><li><a href="module-CustomerRepository.html">CustomerRepository</a></li><li><a href="module-CustomerService.html">CustomerService</a></li><li><a href="module-WorkController.html">WorkController</a></li><li><a href="module-WorkService.html">WorkService</a></li><li><a href="module-dbInstance.html">dbInstance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PORT">PORT</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#server">server</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">service/AuthService.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const AuthRepository = require('../repository/AuthRepository');
+const UserRepository = require('../repository/UserRepository');
+
+require('dotenv').config();
+
+class AuthService {
+
+  /**
+  * Authenticate a user and generate access and refresh tokens.
+  * @param {Object} req - The request object.
+  * @param {Object} res - The response object.
+  * @returns {Promise&lt;Object>} An object containing the access and refresh tokens.
+  */
+  login(req, res) {
+    const isProduction = process.env.NODE_ENV === 'production';
+    const tokenExpiry = isProduction ? '20m' : '9999y';
+    const refreshTokenExpiry = isProduction ? '7d' : '9999y';
+    return new Promise((resolve, reject) => {
+      passport.authenticate('local', async (err, user) => {
+
+        if (err) {
+          reject(err);
+        }
+
+        if (!user) {
+          resolve(null);
+          return;
+        }
+
+        req.logIn(user, async (err) => {
+          if (err) {
+            reject(err);
+          }
+
+          const token = jwt.sign({ id: user.id, name: user.name, device: req.headers['user-agent'] }, process.env.JWT_SECRET, {
+            expiresIn: tokenExpiry
+          });
+
+          const refreshToken = jwt.sign({ id: user.id, name: user.name, device: req.headers['user-agent'] }, process.env.JWT_REFRESH_SECRET, {
+            expiresIn: refreshTokenExpiry
+          });
+
+          resolve({ token, refreshToken });
+        });
+      })(req, res);
+    });
+  }
+
+  /**
+   * Generate a new access token.
+   * @param {Object} payload - The payload to be encoded into the token.
+   * @returns {string} A JWT access token.
+   */
+  generateAccessToken(payload) {
+    return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' });
+  }
+
+  /**
+   * Verify the validity of a refresh token.
+   * @param {string} refreshToken - The refresh token to verify.
+   * @returns {Object} The decoded JWT payload.
+   */
+  async verifyRefreshToken(refreshToken) {
+    return jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+  }
+
+  /**
+   * Generate a new access token using a refresh token.
+   * @param {string} refreshToken - The refresh token.
+   * @returns {string} A new JWT access token.
+   */
+  getNewAccessToken(refreshToken) {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    return this.generateAccessToken({ id: decoded.id });
+  }
+
+  /**
+   * Register a new user. 
+  * @param {Object} userData - The data of the user to be registered.
+  * @returns {Promise&lt;Object>} The created user object.
+  */
+  async register(userData) {
+    return AuthRepository.createUser(userData);
+  }
+
+  /**
+   * Log out the authenticated user.
+   * @param {Object} req - The request object.
+   * @returns {Promise} Resolves when the logout operation is completed.
+   */
+  logout(req) {
+    return new Promise((resolve, reject) => {
+      req.logout((err) => {
+
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  /**
+   * Retrieve the current authenticated user's information using a token.
+   * @param {string} token - The JWT access token.
+   * @returns {Promise&lt;Object>} The authenticated user object.
+   */
+  async getCurrentUser(token) {
+    const decoded = jwt.verify(this.hasToken(token), process.env.JWT_SECRET);
+    const user = await UserRepository.findById(decoded.id);
+
+    if (user) {
+      delete user.password;
+    }
+
+    return user;
+  }
+
+  /**
+   * Extract and validate the JWT token from the authorization header.
+   * @param {string} token - The authorization header containing the token.
+   * @returns {string} The JWT token.
+   */
+  hasToken(token) {
+    if (!token) {
+      throw new Error('Token não fornecido.');
+    }
+    const parts = token.split(' ')
+
+    if (parts.length !== 2) {
+      throw new Error('Formato de token inválido.');
+    }
+
+    const scheme = parts[0];
+    const jwtToken = parts[1];
+
+    if (!/^Bearer$/i.test(scheme)) {
+      throw new Error('Formato do token malformatado.');
+    }
+
+    console.log(jwtToken)
+
+    return jwtToken;
+  }
+
+  /**
+   * Refresh the access token using a provided refresh token.
+   * @param {string} refreshToken - The refresh token.
+   * @returns {string} A new JWT access token.
+   */
+  async refreshAccessToken(refreshToken) {
+    try {
+      await this.verifyRefreshToken(refreshToken);
+      return this.getNewAccessToken(refreshToken);
+    } catch (error) {
+      throw new Error("Refresh token inválido ou expirado");
+    }
+  }
+
+  /**
+  * Verify the validity of a provided JWT token.
+  * @param {string} token - The JWT token to verify.
+  * @returns {boolean} True if the token is valid, throws an error otherwise.
+  */
+  verifyToken(token) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return true;
+    } catch (error) {
+      throw new Error("Refresh token inválido ou expirado");
+    }
+  }
+}
+
+/**
+ * Exports the AuthService class.
+ * @module AuthService
+ */
+module.exports = AuthService;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Thu Oct 26 2023 08:30:26 GMT-0300 (Horário Padrão de Brasília) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

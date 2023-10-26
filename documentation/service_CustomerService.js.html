@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>service/CustomerService.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthController.html">AuthController</a><ul class='methods'><li data-type='method'><a href="AuthController.html#getCurrentUser">getCurrentUser</a></li><li data-type='method'><a href="AuthController.html#login">login</a></li><li data-type='method'><a href="AuthController.html#logout">logout</a></li><li data-type='method'><a href="AuthController.html#refreshToken">refreshToken</a></li><li data-type='method'><a href="AuthController.html#register">register</a></li><li data-type='method'><a href="AuthController.html#verifyToken">verifyToken</a></li></ul></li><li><a href="AuthRepository.html">AuthRepository</a><ul class='methods'><li data-type='method'><a href="AuthRepository.html#.createUser">createUser</a></li><li data-type='method'><a href="AuthRepository.html#.findById">findById</a></li></ul></li><li><a href="Authenticate.html">Authenticate</a><ul class='methods'><li data-type='method'><a href="Authenticate.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="CustomerController.html">CustomerController</a><ul class='methods'><li data-type='method'><a href="CustomerController.html#create">create</a></li><li data-type='method'><a href="CustomerController.html#delete">delete</a></li><li data-type='method'><a href="CustomerController.html#deleteClients">deleteClients</a></li><li data-type='method'><a href="CustomerController.html#list">list</a></li><li data-type='method'><a href="CustomerController.html#update">update</a></li></ul></li><li><a href="CustomerRepository.html">CustomerRepository</a><ul class='methods'><li data-type='method'><a href="CustomerRepository.html#create">create</a></li><li data-type='method'><a href="CustomerRepository.html#delete">delete</a></li><li data-type='method'><a href="CustomerRepository.html#find">find</a></li><li data-type='method'><a href="CustomerRepository.html#findById">findById</a></li><li data-type='method'><a href="CustomerRepository.html#update">update</a></li></ul></li><li><a href="CustomerRoutes.html">CustomerRoutes</a><ul class='methods'><li data-type='method'><a href="CustomerRoutes.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="CustomerService.html">CustomerService</a><ul class='methods'><li data-type='method'><a href="CustomerService.html#create">create</a></li><li data-type='method'><a href="CustomerService.html#delete">delete</a></li><li data-type='method'><a href="CustomerService.html#deleteClients">deleteClients</a></li><li data-type='method'><a href="CustomerService.html#findById">findById</a></li><li data-type='method'><a href="CustomerService.html#list">list</a></li><li data-type='method'><a href="CustomerService.html#update">update</a></li></ul></li><li><a href="UserController.html">UserController</a><ul class='methods'><li data-type='method'><a href="UserController.html#deleteUser">deleteUser</a></li><li data-type='method'><a href="UserController.html#getAllUsers">getAllUsers</a></li></ul></li><li><a href="UserRepository.html">UserRepository</a><ul class='methods'><li data-type='method'><a href="UserRepository.html#create">create</a></li><li data-type='method'><a href="UserRepository.html#delete">delete</a></li><li data-type='method'><a href="UserRepository.html#findAll">findAll</a></li><li data-type='method'><a href="UserRepository.html#findById">findById</a></li></ul></li><li><a href="UserRouter.html">UserRouter</a><ul class='methods'><li data-type='method'><a href="UserRouter.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="WorkController.html">WorkController</a><ul class='methods'><li data-type='method'><a href="WorkController.html#create">create</a></li><li data-type='method'><a href="WorkController.html#destroy">destroy</a></li><li data-type='method'><a href="WorkController.html#getClientById">getClientById</a></li><li data-type='method'><a href="WorkController.html#list">list</a></li><li data-type='method'><a href="WorkController.html#listTotal">listTotal</a></li><li data-type='method'><a href="WorkController.html#update">update</a></li></ul></li><li><a href="WorkRepository.html">WorkRepository</a><ul class='methods'><li data-type='method'><a href="WorkRepository.html#create">create</a></li><li data-type='method'><a href="WorkRepository.html#deleteById">deleteById</a></li><li data-type='method'><a href="WorkRepository.html#find">find</a></li><li data-type='method'><a href="WorkRepository.html#findByUserId">findByUserId</a></li><li data-type='method'><a href="WorkRepository.html#generateTotalDaily">generateTotalDaily</a></li><li data-type='method'><a href="WorkRepository.html#updateById">updateById</a></li></ul></li><li><a href="WorkRoutes.html">WorkRoutes</a><ul class='methods'><li data-type='method'><a href="WorkRoutes.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="WorkService.html">WorkService</a><ul class='methods'><li data-type='method'><a href="WorkService.html#create">create</a></li><li data-type='method'><a href="WorkService.html#destroy">destroy</a></li><li data-type='method'><a href="WorkService.html#getClientById">getClientById</a></li><li data-type='method'><a href="WorkService.html#getTotal">getTotal</a></li><li data-type='method'><a href="WorkService.html#list">list</a></li><li data-type='method'><a href="WorkService.html#update">update</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-AuthController.html">AuthController</a></li><li><a href="module-AuthRepository.html">AuthRepository</a></li><li><a href="module-AuthService.html">AuthService</a></li><li><a href="module-CustomerController.html">CustomerController</a></li><li><a href="module-CustomerRepository.html">CustomerRepository</a></li><li><a href="module-CustomerService.html">CustomerService</a></li><li><a href="module-WorkController.html">WorkController</a></li><li><a href="module-WorkService.html">WorkService</a></li><li><a href="module-dbInstance.html">dbInstance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PORT">PORT</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#server">server</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">service/CustomerService.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const CustomerRepository = require('../repository/CustomerRepository');
+
+/**
+ * Service class for handling customer-related operations.
+ */
+class CustomerService {
+
+    /**
+     * Creates a new instance of the CustomerService.
+     * @constructor
+     */
+    constructor() {
+        this.repositoy = new CustomerRepository();
+    }
+
+    /**
+     * Lists all customers.
+     * @async
+     * @returns {Promise&lt;Object[]>} - Returns a list of customers.
+     */
+    async list() {
+        return this.repositoy.find();
+    }
+
+    /**
+     * Finds a customer by its ID.
+     * @async
+     * @param {string|number} client_id - The ID of the client to find.
+     * @returns {Promise&lt;Object|null>} - Returns the found customer or null.
+     */
+    async findById(client_id) {
+        return this.repositoy.findById(client_id);
+    }
+
+    /**
+     * Creates a new customer.
+     * @async
+     * @param {Object} clientData - The data of the customer to create.
+     * @returns {Promise&lt;Object>} - Returns the created customer.
+     */
+    async create(clientData) {
+        // TODO: modify here to allow blank information
+        if (clientData?.phone) {
+            clientData.phone = clientData.phone.replace(/\D+/g, '');
+        }
+
+        if (clientData?.cnpj) {
+            clientData.cnpj = clientData.cnpj.replace(/\D+/g, '');
+        }
+
+        return this.repositoy.create(clientData);
+    }
+
+    /**
+     * Updates an existing customer by its ID.
+     * @async
+     * @param {string|number} id - The ID of the customer to update.
+     * @param {Object} clientData - The data to update the customer with.
+     * @returns {Promise&lt;Object>} - Returns the updated customer.
+     * @throws {Error} - Throws an error if the customer update failed.
+     */
+    async update(id, clientData) {
+        if (clientData?.phone) {
+            clientData.phone = clientData.phone.replace(/\D+/g, '');
+        }
+
+        if (clientData?.cnpj) {
+            clientData.cnpj = clientData.cnpj.replace(/\D+/g, '');
+        }
+
+        const updatedClient = await this.repositoy.update(id, clientData);
+
+        if (!updatedClient) {
+            throw new Error('Erro ao atualizar cliente.');
+        }
+
+        return updatedClient;
+    }
+
+    /**
+     * Deletes a customer by its ID.
+     * @async
+     * @param {string|number} id - The ID of the customer to delete.
+     * @returns {Promise&lt;string>} - Returns a message indicating the success of the deletion.
+     * @throws {Error} - Throws an error if the customer deletion failed.
+     */
+    async delete(id) {
+        const result = await this.repositoy.delete(id);
+        if (result) {
+            return 'Cliente deletado com sucesso!';
+        } else {
+            throw new Error('Erro ao deletar cliente.');
+        }
+    }
+
+    /**
+     * Deletes multiple customers provided an array of IDs.
+     * @async
+     * @param {string[]|number[]} ids - The array of IDs of the customers to delete.
+     * @returns {Promise&lt;string>} - Returns a message indicating the success of the deletion.
+     * @throws {Error} - Throws an error if the customers deletion failed.
+     */
+    async deleteClients(ids) {
+        const result = await this.repositoy.delete(ids);
+        if (result) {
+            return 'Clientes deletados com sucesso!';
+        } else {
+            throw new Error('Erro ao deletar clientes.');
+        }
+    }
+}
+
+/**
+ * Exports the CustomerService class.
+ * @module CustomerService
+ */
+module.exports = CustomerService;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Thu Oct 26 2023 08:30:26 GMT-0300 (Horário Padrão de Brasília) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

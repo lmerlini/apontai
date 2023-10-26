@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>controllers/UserController.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthController.html">AuthController</a><ul class='methods'><li data-type='method'><a href="AuthController.html#getCurrentUser">getCurrentUser</a></li><li data-type='method'><a href="AuthController.html#login">login</a></li><li data-type='method'><a href="AuthController.html#logout">logout</a></li><li data-type='method'><a href="AuthController.html#refreshToken">refreshToken</a></li><li data-type='method'><a href="AuthController.html#register">register</a></li><li data-type='method'><a href="AuthController.html#verifyToken">verifyToken</a></li></ul></li><li><a href="AuthRepository.html">AuthRepository</a><ul class='methods'><li data-type='method'><a href="AuthRepository.html#.createUser">createUser</a></li><li data-type='method'><a href="AuthRepository.html#.findById">findById</a></li></ul></li><li><a href="Authenticate.html">Authenticate</a><ul class='methods'><li data-type='method'><a href="Authenticate.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="CustomerController.html">CustomerController</a><ul class='methods'><li data-type='method'><a href="CustomerController.html#create">create</a></li><li data-type='method'><a href="CustomerController.html#delete">delete</a></li><li data-type='method'><a href="CustomerController.html#deleteClients">deleteClients</a></li><li data-type='method'><a href="CustomerController.html#list">list</a></li><li data-type='method'><a href="CustomerController.html#update">update</a></li></ul></li><li><a href="CustomerRepository.html">CustomerRepository</a><ul class='methods'><li data-type='method'><a href="CustomerRepository.html#create">create</a></li><li data-type='method'><a href="CustomerRepository.html#delete">delete</a></li><li data-type='method'><a href="CustomerRepository.html#find">find</a></li><li data-type='method'><a href="CustomerRepository.html#findById">findById</a></li><li data-type='method'><a href="CustomerRepository.html#update">update</a></li></ul></li><li><a href="CustomerRoutes.html">CustomerRoutes</a><ul class='methods'><li data-type='method'><a href="CustomerRoutes.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="CustomerService.html">CustomerService</a><ul class='methods'><li data-type='method'><a href="CustomerService.html#create">create</a></li><li data-type='method'><a href="CustomerService.html#delete">delete</a></li><li data-type='method'><a href="CustomerService.html#deleteClients">deleteClients</a></li><li data-type='method'><a href="CustomerService.html#findById">findById</a></li><li data-type='method'><a href="CustomerService.html#list">list</a></li><li data-type='method'><a href="CustomerService.html#update">update</a></li></ul></li><li><a href="UserController.html">UserController</a><ul class='methods'><li data-type='method'><a href="UserController.html#deleteUser">deleteUser</a></li><li data-type='method'><a href="UserController.html#getAllUsers">getAllUsers</a></li></ul></li><li><a href="UserRepository.html">UserRepository</a><ul class='methods'><li data-type='method'><a href="UserRepository.html#create">create</a></li><li data-type='method'><a href="UserRepository.html#delete">delete</a></li><li data-type='method'><a href="UserRepository.html#findAll">findAll</a></li><li data-type='method'><a href="UserRepository.html#findById">findById</a></li></ul></li><li><a href="UserRouter.html">UserRouter</a><ul class='methods'><li data-type='method'><a href="UserRouter.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="WorkController.html">WorkController</a><ul class='methods'><li data-type='method'><a href="WorkController.html#create">create</a></li><li data-type='method'><a href="WorkController.html#destroy">destroy</a></li><li data-type='method'><a href="WorkController.html#getClientById">getClientById</a></li><li data-type='method'><a href="WorkController.html#list">list</a></li><li data-type='method'><a href="WorkController.html#listTotal">listTotal</a></li><li data-type='method'><a href="WorkController.html#update">update</a></li></ul></li><li><a href="WorkRepository.html">WorkRepository</a><ul class='methods'><li data-type='method'><a href="WorkRepository.html#create">create</a></li><li data-type='method'><a href="WorkRepository.html#deleteById">deleteById</a></li><li data-type='method'><a href="WorkRepository.html#find">find</a></li><li data-type='method'><a href="WorkRepository.html#findByUserId">findByUserId</a></li><li data-type='method'><a href="WorkRepository.html#generateTotalDaily">generateTotalDaily</a></li><li data-type='method'><a href="WorkRepository.html#updateById">updateById</a></li></ul></li><li><a href="WorkRoutes.html">WorkRoutes</a><ul class='methods'><li data-type='method'><a href="WorkRoutes.html#initializeRoutes">initializeRoutes</a></li></ul></li><li><a href="WorkService.html">WorkService</a><ul class='methods'><li data-type='method'><a href="WorkService.html#create">create</a></li><li data-type='method'><a href="WorkService.html#destroy">destroy</a></li><li data-type='method'><a href="WorkService.html#getClientById">getClientById</a></li><li data-type='method'><a href="WorkService.html#getTotal">getTotal</a></li><li data-type='method'><a href="WorkService.html#list">list</a></li><li data-type='method'><a href="WorkService.html#update">update</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-AuthController.html">AuthController</a></li><li><a href="module-AuthRepository.html">AuthRepository</a></li><li><a href="module-AuthService.html">AuthService</a></li><li><a href="module-CustomerController.html">CustomerController</a></li><li><a href="module-CustomerRepository.html">CustomerRepository</a></li><li><a href="module-CustomerService.html">CustomerService</a></li><li><a href="module-WorkController.html">WorkController</a></li><li><a href="module-WorkService.html">WorkService</a></li><li><a href="module-dbInstance.html">dbInstance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#PORT">PORT</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#server">server</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">controllers/UserController.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const UserService = require('../service/UserService');
+
+/**
+ * Controller for user-related operations.
+ */
+class UserController {
+
+  constructor() {
+    this.service = new UserService()
+  }
+  /**
+  * Retrieves all users from the database.
+  * 
+  * @param {express.Request} req - Express request object.
+  * @param {express.Response} res - Express response object.
+  * @returns {express.Response} - Response object with the status and the list of users or error message.
+  */
+  async getAllUsers(req, res) {
+    try {
+      const users = await this.service.getAllUsers();
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json({ message: 'Erro ao buscar usuários.', error: error });
+    }
+  }
+
+  /**
+   * Deletes a user by ID.
+   * 
+   * @param {express.Request} req - Express request object.
+   * @param {express.Response} res - Express response object.
+   * @returns {express.Response} - Response object with the status and success or error message.
+   */
+  async deleteUser(req, res) {
+    try {
+      const { id } = req.body;
+      const result = await this.service.deleteUserById(id);
+
+      if (result.success) {
+        return res.status(200).json({ message: result.message });
+      } else {
+        return res.status(404).json({ message: result.message });
+      }
+    } catch (error) {
+      return res.status(500).json({ message: 'Erro ao deletar o usuário.' });
+    }
+  }
+}
+
+/**
+ * Exporting an instance of UserController for user-related operations.
+ * @type {UserController}
+ */
+module.exports = UserController;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Thu Oct 26 2023 08:30:26 GMT-0300 (Horário Padrão de Brasília) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
