@@ -1,7 +1,13 @@
 version: '3'
 
+networks:
+  app-network:
+    driver: bridge
+
 services:
   web:
+    networks:
+      - app-network  
     build: 
       context: .
     ports:
@@ -12,9 +18,11 @@ services:
       - redis
       - mysql
 
-  mysql:
+  mysql:  
     container_name: hostmysql
     image: mysql:latest
+    networks:
+      - app-network    
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -31,6 +39,8 @@ services:
   redis:
     container_name: hostredis
     image: "redis:alpine"
+    networks:
+      - app-network
     command: redis-server --requirepass ${REDIS_PASSWORD}
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}

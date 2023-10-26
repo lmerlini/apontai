@@ -1,16 +1,15 @@
-const ClientService = require('../service/ClientService');
+const CustomerService = require('../service/CustomerService');
 
-class ClientController {
+class CustomerController {
 
     constructor() {
-        this.service = new ClientService();
+        this.service = new CustomerService();
     }
 
     async list(_, res) {
         try {
-
-            const clients = await this.service.list();
-            res.status(200).json(clients);
+            const customer = await this.service.list();
+            res.status(200).json(customer);
         } catch (error) {
             res.status(500).json({
                 message: 'Erro ao retornar dados dos clientes',
@@ -20,11 +19,11 @@ class ClientController {
     }
 
     async create(req, res) {
-        const clientData = req.body;
+        const customerData = req.body;
 
         try {
-            const client = await this.service.create(clientData);
-            res.status(201).json(client);
+            const customer = await this.service.create(customerData);
+            res.status(201).json(customer);
         } catch (error) {
             if (error.errors)
                 res.status(500).json({ error: error.errors })
@@ -35,8 +34,8 @@ class ClientController {
 
     async update(req, res) {
         const { id } = req.params;
-        const client = await this.service.update(id, req.body)
-        res.status(200).json({ client: client })
+        const customer = await this.service.update(id, req.body)
+        res.status(200).json({ customer: customer })
     }
 
     async delete(req, res) {
@@ -59,4 +58,4 @@ class ClientController {
     }
 }
 
-module.exports = ClientController;
+module.exports = CustomerController;

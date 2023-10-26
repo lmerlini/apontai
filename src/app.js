@@ -10,7 +10,6 @@ const app = express();
 const PORT = process.env.PORT;
 const PREFIX = process.env.PREFIX_NAME;
 
-
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
@@ -35,7 +34,7 @@ app.use(passport.session());
 
 app.use(`/${PREFIX}`, require('./routes/routesAuthenticate'));
 app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesUsers'));
-app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesClients'));
+app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesCustomers'));
 app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesWorks'));
 
 const server = app.listen(PORT, () => {

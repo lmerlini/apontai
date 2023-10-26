@@ -1,9 +1,9 @@
-const ClientRepository = require('../repository/ClientRepository');
+const CustomerRepository = require('../repository/CustomerRepository');
 
-class ClientService {
+class CustomerService {
 
     constructor(){
-        this.repositoy = new ClientRepository()
+        this.repositoy = new CustomerRepository()
     }
 
     async list() {
@@ -65,4 +65,4 @@ class ClientService {
     }
 }
 
-module.exports = ClientService;
+module.exports = CustomerService;

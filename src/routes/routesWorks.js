@@ -1,28 +1,28 @@
 const express = require('express');
-const WorkEntryController = require('../controllers/WorkEntryController');
+const WorkController = require('../controllers/WorkController');
 
-class WorkEntryRoutes {
+class WorkRoutes {
 
+    PREFIX = "works"
     constructor() {
-        this.controller = new WorkEntryController();
+        this.controller = new WorkController();
         this.router = express.Router();
-        this.initializeRoutes();
+        this.initializeRoutes(this.PREFIX);
     }
 
-    initializeRoutes() {
-        const PREFIX = "workentries";
+    initializeRoutes(uri) {
 
-        this.router.get(`/${PREFIX}/list`, (req, res) => this.controller.list(req, res));
-        this.router.get(`/${PREFIX}/totalwork`, (req, res) => this.controller.listTotal(req, res));
-        this.router.get(`/${PREFIX}/list/:client_id`, (req, res) => this.controller.getClientById(req, res));
-        this.router.post(`/${PREFIX}/`, (req, res) => this.controller.create(req, res));
-        this.router.delete(`/${PREFIX}`, (req, res) => this.controller.destroy(req, res));
-        this.router.patch(`/${PREFIX}`, (req, res) => this.controller.update(req, res));
+        this.router.get(`/${uri}/list`, (req, res) => this.controller.list(req, res));
+        this.router.get(`/${uri}/totalwork`, (req, res) => this.controller.listTotal(req, res));
+        this.router.get(`/${uri}/list/:client_id`, (req, res) => this.controller.getClientById(req, res));
+        this.router.post(`/${uri}/`, (req, res) => this.controller.create(req, res));
+        this.router.delete(`/${uri}`, (req, res) => this.controller.destroy(req, res));
+        this.router.patch(`/${uri}`, (req, res) => this.controller.update(req, res));
 
-        this.router.use(`/${PREFIX}/*`, (_, res, next) => {
+        this.router.use(`/${uri}/*`, (_, res, next) => {
             res.status(404).json({ "message": 'Página não encontrada!' });
         });
     }
 }
 
-module.exports = new WorkEntryRoutes().router;
+module.exports = new WorkRoutes().router;
