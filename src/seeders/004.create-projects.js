@@ -10,7 +10,6 @@ module.exports = {
                 value: 1000,
                 start_date: new Date('2023-01-01'),
                 end_date: new Date('2023-12-31'),
-                status: 'Ativo',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -21,7 +20,6 @@ module.exports = {
                 value: 2000,
                 start_date: new Date('2023-02-01'),
                 end_date: new Date('2023-10-31'),
-                status: 'Em Progresso',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },
@@ -32,7 +30,6 @@ module.exports = {
                 value: 2000,
                 start_date: new Date('2023-02-01'),
                 end_date: new Date('2023-10-31'),
-                status: 'Em Progresso',
                 createdAt: new Date(),
                 updatedAt: new Date()
             },

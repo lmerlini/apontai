@@ -8,38 +8,73 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        comment: "Identificador único para cada cliente."
+        comment: "Identificador único para cada."
       },
       name: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false,
-        comment: "Nome da empresa cliente."
+        comment: "Nome da empresa."
       },
       phone: {
         type: Sequelize.STRING,
         allowNull: false,
-        comment: "Número de telefone da empresa cliente."
+        comment: "Número de telefone da empresa."
       },
       cnpj: {
         type: Sequelize.STRING,
         allowNull: false,
-        comment: "Número do CNPJ da empresa cliente."
+        comment: "Número do CNPJ da empresa."
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        comment: "Endereço de e-mail da empresa cliente."
+        comment: "Endereço de e-mail da empresa."
       },
-      address: {
+      country: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+        comment: "País da empresa."
+      },
+      state: {
+        type: Sequelize.CHAR(2),
+        allowNull: true,
+        comment: "Estado da empresa."
+      },
+      zip_code: {
         type: Sequelize.STRING,
-        allowNull: false,
-        comment: "Endereço da empresa cliente."
+        allowNull: true,
+        comment: "Código postal da localidade da empresa."
+      },
+      city: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+        comment: "Cidade da empresa."
+      },
+      street_address: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        comment: "Endereço da rua da empresa."
+      },
+      address_number: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+        comment: "Número do endereço da empresa."
+      },
+      complement: {
+        type: Sequelize.STRING(50),
+        allowNull: true,
+        comment: "Complemento do endereço da empresa (por exemplo, sala, apartamento)."
+      },
+      neighborhood: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+        comment: "Bairro da empresa."
       },
       contact: {
         type: Sequelize.STRING,
         allowNull: false,
-        comment: "Nome do contato principal na empresa cliente."
+        comment: "Nome do contato principal na empresa."
       },
       createdAt: {
         allowNull: false,

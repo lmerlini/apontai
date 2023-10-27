@@ -7,6 +7,11 @@ require('dotenv').config();
 
 class AuthService {
 
+  constructor() {
+    this.authRepo = new AuthRepository()
+    this.userRepo = new UserRepository()
+  }
+
   /**
   * Authenticate a user and generate access and refresh tokens.
   * @param {Object} req - The request object.
@@ -82,7 +87,7 @@ class AuthService {
   * @returns {Promise<Object>} The created user object.
   */
   async register(userData) {
-    return AuthRepository.createUser(userData);
+    return this.authRepo.createUser(userData);
   }
 
   /**
@@ -111,7 +116,7 @@ class AuthService {
    */
   async getCurrentUser(token) {
     const decoded = jwt.verify(this.hasToken(token), process.env.JWT_SECRET);
-    const user = await UserRepository.findById(decoded.id);
+    const user = await this.userRepo.findById(decoded.id);
 
     if (user) {
       delete user.password;
@@ -141,8 +146,6 @@ class AuthService {
     if (!/^Bearer$/i.test(scheme)) {
       throw new Error('Formato do token malformatado.');
     }
-
-    console.log(jwtToken)
 
     return jwtToken;
   }

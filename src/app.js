@@ -66,6 +66,7 @@ app.use(`/${PREFIX}`, require('./routes/routesAuthenticate'));
 app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesUsers'));
 app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesCustomers'));
 app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesWorks'));
+app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesProjects'))
 
 /**
  * Start the server.

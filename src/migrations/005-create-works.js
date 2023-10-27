@@ -52,9 +52,10 @@ module.exports = {
                 comment: "Descrição detalhada do trabalho."
             },
             status: {
-                type: Sequelize.STRING,
+                type: Sequelize.ENUM('AT', 'CO', 'CA', 'PE'),
+                defaultValue: 'AT',
                 allowNull: false,
-                comment: "Status atual do trabalho."
+                comment: "[AT-ATIVO] | [CO-CONCLUIDO] | [CA-CANCELADO] | [PE-PENDENTE]"
             },
             createdAt: {
                 allowNull: false,
@@ -69,7 +70,7 @@ module.exports = {
                 comment: "Data e hora da última atualização do registro."
             },
             deletedAt: {
-                type: Sequelize.DATE,                
+                type: Sequelize.DATE,
                 allowNull: true,
                 comment: "Data de exclusão do registro (se excluído)."
             }

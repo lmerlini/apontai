@@ -43,6 +43,15 @@ class WorkRepository {
         return this.generateTotalDaily(results);
     }
 
+    async findProjectId(project_id, user_id) {
+        return this.model.findAll({
+            where: {
+                project_id: project_id,
+                user_id: user_id  
+            }
+        })
+    }
+
     /**
      * Creates a new work entry.
      * @async
@@ -72,12 +81,13 @@ class WorkRepository {
      * @param {Object} data - Updated data for the work entry.
      * @returns {Promise<Object>} Updated work entry.
      */
-    async updateById(id, data) {
-        const results = await this.model.findByPk(id);
-        if (!results) {
-            return null;
-        }
-        return results.update(data);
+    async updateById(id, project_id, data) {
+
+        const result = await this.model.findOne({
+            where: { id: id, project_id: project_id }
+        });
+
+        return result.update(data);
     }
 
     /**
