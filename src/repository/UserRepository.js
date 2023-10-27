@@ -5,12 +5,16 @@ const { User } = require('../models');
  */
 class UserRepository {
 
+    constructor(){
+        this.model = User
+    }
+
     /**
      * Fetches all user records from the database.
      * @returns {Promise<Array>} An array of User instances.
      */
     async findAll() {
-        return await User.findAll();
+        return await this.model.findAll();
     }
 
     /**
@@ -19,7 +23,7 @@ class UserRepository {
      * @returns {Promise<Object|null>} The User instance or null if not found.
      */
     async findById(id) {
-        return await User.findByPk(id);
+        return await this.model.findByPk(id);
     }
 
     /**
@@ -28,7 +32,7 @@ class UserRepository {
      * @returns {Promise<Object>} The created User instance.
      */
     async create(data) {
-        return await User.create(data);
+        return await this.model.create(data);
     }
 
     /**
@@ -37,7 +41,7 @@ class UserRepository {
      * @returns {Promise<number>} The number of rows affected (1 if deletion was successful, 0 otherwise).
      */
     async delete(id) {
-        return await User.destroy({
+        return await this.model.destroy({
             where: { id }
         });
     }

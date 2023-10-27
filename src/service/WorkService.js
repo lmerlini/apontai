@@ -1,6 +1,6 @@
 const WorkRepository = require('../repository/WorkRepository');
-const { Op } = require('sequelize');
 const CustomerService = require('./CustomerService');
+const { Op } = require('sequelize');
 
 /**
  * Service for handling work-related operations.
@@ -12,7 +12,7 @@ class WorkService {
      * @constructor
      */
     constructor() {
-        this.workRepo = new WorkRepository();
+        this.work = new WorkRepository();
         this.customer = new CustomerService()
     }
 
@@ -24,13 +24,13 @@ class WorkService {
      * @returns {Promise<Object>} The created work entry.
      * @throws {Error} Throws an error if the specified customer does not exist.
      */
-    async create(customer_id, data) {
-        const customer = await this.customer.findById(customer_id)
+    async create(project_id, body) {
+        const customer = await this.customer.findById(project_id)
 
         if (!customer) {
-            throw new Error(`Cliente com ID ${customer_id} não existe.`);
+            throw new Error(`Projeto com ID ${project_id} não existe.`);
         }
-        return this.workRepo.create(data);
+        return this.work.create(body);
     }
 
     /**
@@ -40,7 +40,7 @@ class WorkService {
      * @returns {Promise<Array>} Array of work entries.
      */
     async list(userId) {
-        return this.workRepo.findByUserId(userId);
+        return this.work.findByUserId(userId);
     }
 
     /**
@@ -51,8 +51,8 @@ class WorkService {
      * @param {string} endDate - End date for the work entries retrieval.
      * @returns {Promise<Array>} Array of work entries.
      */
-    async getTotal(userId, startDate, endDate) {
-        let result = await this.workRepo.find({
+    async listPerDate(userId, startDate, endDate) {
+        let result = await this.work.find({
             where: {
                 user_id: userId,
                 service_date:
@@ -72,7 +72,7 @@ class WorkService {
      * @throws {Error} Throws an error if the work entry does not exist.
      */
     async destroy(id) {
-        const result = await this.workRepo.deleteById(id);
+        const result = await this.work.deleteById(id);
         if (result) {
             return 'Entrada de trabalho deletada com sucesso!';
         } else {
@@ -87,25 +87,18 @@ class WorkService {
      * @returns {Object} Updated work entry.
      * @throws {Error} Throws an error if the work entry cannot be updated.
      */
-    update(id, entryData) {
-        const result = this.workRepo.updateById(id, entryData);
-        if (result) {
-            return result;
-        } else {
-            throw new Error(`Não foi possível alterar, tente novamente!`);
-        }
+    update(id, project_id, body) {
+        return this.work.updateById(id, project_id, body);
     }
 
     /**
-     * Retrieves all work entries associated with a specific client.
+     * Retrieves all work entries associated with a specific Projects.
      * @async
-     * @param {number} id - ID of the client.
-     * @returns {Promise<Array>} Array of work entries associated with the client.
+     * @param {number} id - ID of the Project.
+     * @returns {Promise<Array>} Array of work entries associated with the Projects.
      */
-    async getClientById(id) {
-        return await this.workRepo.findAll({
-            where: { client_id: id }
-        });
+    async getProjectsById(project_id, user_id) {
+        return await this.work.findProjectId(project_id, user_id);
     }
 
 }

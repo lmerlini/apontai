@@ -47,13 +47,13 @@ module.exports = {
         allowNull: true,
         comment: "Papel ou função do usuário no sistema."
       },
-      isActive: {
+      is_active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: true,
         comment: "Indica se o usuário está ativo no sistema."
       },
-      lastLogin: {
+      last_login: {
         type: Sequelize.DATE,
         allowNull: true,
         comment: "Data e hora do último login do usuário no sistema."

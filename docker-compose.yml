@@ -6,6 +6,8 @@ networks:
 
 services:
   web:
+    volumes:
+      - .:/app
     networks:
       - app-network  
     build: 
@@ -17,6 +19,7 @@ services:
     depends_on:
       - redis
       - mysql
+    command: /bin/sh -c "npm run db:refresh && npm start"
 
   mysql:  
     container_name: hostmysql

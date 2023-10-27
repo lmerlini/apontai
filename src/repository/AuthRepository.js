@@ -5,6 +5,10 @@ const { User } = require('../models');
  */
 class AuthRepository {
 
+  constructor() {
+    this.model = User
+  }
+
   /**
    * Creates a new user record in the database.
    * @param {Object} param0 - Object containing user details.
@@ -13,9 +17,9 @@ class AuthRepository {
    * @returns {Promise<Object>} The created User instance.
    * @throws {Error} Throws an error if the username is already in use or if there's any other issue.
    */
-  static async createUser({ username, password }) {
+  async createUser(data) {
     try {
-      const user = await User.create({ username, password });
+      const user = await this.model.create(data);
       return user;
     } catch (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
@@ -31,9 +35,9 @@ class AuthRepository {
    * @returns {Promise<Object>} The User instance.
    * @throws {Error} Throws an error if the user is not found or if there's any other issue.
    */
-  static async findById(id) {
+  async findById(id) {
     try {
-      const user = await User.findByPk(id);
+      const user = await this.model.findByPk(id);
       if (!user) {
         throw new Error('Usuário não encontrado');
       }

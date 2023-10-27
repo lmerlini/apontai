@@ -42,9 +42,10 @@ module.exports = {
                 comment: "Data de término previsto ou real do projeto."
             },
             status: {
-                type: Sequelize.STRING,
+                type: Sequelize.ENUM('AT', 'CO', 'CA', 'PE'),
+                defaultValue: 'AT',
                 allowNull: false,
-                comment: "Status atual do projeto."
+                comment: "Status atual do projeto [AT-ATIVO] | [CO-CONCLUIDO] | [CA-CANCELADO] | [PE-PENDENTE]."
             },
             createdAt: {
                 allowNull: false,
@@ -57,6 +58,11 @@ module.exports = {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
                 comment: "Data e hora da última atualização do registro."
+            },
+            deletedAt: {
+                type: Sequelize.DATE,
+                allowNull: true,
+                comment: "Data e hora de exclusão do registro, caso tenha sido excluído."
             }
         });
 
