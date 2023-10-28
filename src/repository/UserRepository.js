@@ -1,20 +1,25 @@
 const { User } = require('../models');
+const FieldsRepository = require('./FieldsRepository')
 
 /**
  * Repository class for User-related database operations.
  */
 class UserRepository {
 
-    constructor(){
+
+    constructor() {
         this.model = User
+        this.fields = new FieldsRepository().exclude([
+            'password'
+        ])
     }
 
     /**
      * Fetches all user records from the database.
      * @returns {Promise<Array>} An array of User instances.
      */
-    async findAll() {
-        return await this.model.findAll();
+    async list() {
+        return await this.model.findAll(this.fields.getAttributes());
     }
 
     /**
@@ -23,7 +28,7 @@ class UserRepository {
      * @returns {Promise<Object|null>} The User instance or null if not found.
      */
     async findById(id) {
-        return await this.model.findByPk(id);
+        return await this.model.findByPk(id, this.fields.getAttributes());
     }
 
     /**

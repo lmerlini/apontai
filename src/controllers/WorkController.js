@@ -19,13 +19,13 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    async list(req, res) {
+    list = async (req, res) => {
         try {
             this._preprocessRequest(req);
             const entries = await this.service.list(req.body.user_id);
-            res.status(200).json(entries);
+            return res.status(200).json(entries);
         } catch (error) {
-            res.status(500).json({ message: 'Erro ao buscar apontamentos.', error: error });
+            return res.status(500).json({ message: 'Erro ao buscar apontamentos.', error: error });
         }
     }
 
@@ -35,11 +35,11 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    async listPerDate(req, res) {
+    listPerDate = async (req, res) => {
         this._preprocessRequest(req);
         const { startDate, endDate } = req.body;
         const totalWork = await this.service.listPerDate(req.body.user_id, startDate, endDate);
-        res.status(200).json(totalWork);
+        return res.status(200).json(totalWork);
     }
 
     /**
@@ -48,7 +48,7 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    async create(req, res) {
+    create = async (req, res) => {
         try {
             this._preprocessRequest(req);
             const { project_id } = req.body;
@@ -57,9 +57,9 @@ class WorkController {
                 return res.status(400).json({ message: 'ID do Projecto inválido.' });
             }
             const entry = await this.service.create(project_id, req.body);
-            res.status(200).json(entry);
+            return res.status(200).json(entry);
         } catch (error) {
-            res.status(400).json({ message: "Não foi possível criar o trabalho, verifique!", error: error });
+            return res.status(400).json({ message: "Não foi possível criar o trabalho, verifique!", error: error });
         }
     }
 
@@ -69,14 +69,14 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    async destroy(req, res) {
+    destroy = async (req, res) => {
         try {
             this._preprocessRequest(req);
             const message = await this.service.destroy(req.body.id);
-            res.status(200).json({ message });
+            return res.status(200).json({ message });
         } catch (error) {
             console.error('Erro ao deletar a entrada de trabalho:', error);
-            res.status(500).json({ message: 'Erro ao deletar a entrada de trabalho.' });
+            return res.status(500).json({ message: 'Erro ao deletar a entrada de trabalho.' });
         }
     }
 
@@ -86,7 +86,7 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    async update(req, res) {
+    update = async (req, res) => {
         try {
             this._preprocessRequest(req);
             const { work_id, project_id } = req.params;
@@ -108,7 +108,7 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    async getProjectsById(req, res) {
+    getProjectsById = async (req, res) => {
         try {
             this._preprocessRequest(req);
             const { project_id } = req.params;
@@ -120,13 +120,13 @@ class WorkController {
             const entry = await this.service.getProjectsById(project_id, req.body.user_id);
 
             if (entry) {
-                res.status(200).json(entry);
+                return res.status(200).json(entry);
             } else {
-                res.status(404).json({ message: "Projeto não encontrado." });
+                return res.status(404).json({ message: "Projeto não encontrado." });
             }
 
         } catch (error) {
-            res.status(500).json({ message: "Erro ao retornar Projetos.", error: error });
+            return res.status(500).json({ message: "Erro ao retornar Projetos.", error: error });
         }
     }
 

@@ -6,26 +6,20 @@ const ProjectController = require('../controllers/ProjectController');
  */
 class ProjectRoutes {
 
-    PREFIX = "projects"
-
     constructor() {
         this.controller = new ProjectController();
         this.router = express.Router();
-        this.initializeRoutes(this.PREFIX);
+        this.initializeRoutes();
     }
 
-    /**
-     * Initializes the routes for the Project.
-     * @param {string} uri - The prefix for the Project routes.
-     */
-    initializeRoutes(uri) {
+    initializeRoutes() {
 
-        this.router.get(`/${uri}/list`, (req, res) => this.controller.list(req, res));
-        this.router.post(`/${uri}/create`, (req, res) => this.controller.create(req, res));
-        this.router.delete(`/${uri}/delete`, (req, res) => this.controller.delete(req, res));
-        this.router.patch(`/${uri}/update/:project_id/:accountable_id`, (req, res) => this.controller.update(req, res));
+        this.router.get(`/list`, this.controller.list);
+        this.router.post(`/create`, this.controller.create);
+        this.router.delete(`/delete`, this.controller.delete);
+        this.router.patch(`/update/:project_id`, this.controller.update);
 
-        this.router.use(`/${uri}/*`, (_, res, next) => {
+        this.router.use(`/*`, (_, res, next) => {
             res.status(404).json({ "message": 'Página não encontrada!' });
         });
     }

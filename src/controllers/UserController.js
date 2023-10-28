@@ -8,6 +8,14 @@ class UserController {
   constructor() {
     this.service = new UserService()
   }
+
+  create = async(req, res)=>{
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
   /**
   * Retrieves all users from the database.
   * 
@@ -15,9 +23,9 @@ class UserController {
   * @param {express.Response} res - Express response object.
   * @returns {express.Response} - Response object with the status and the list of users or error message.
   */
-  async getAllUsers(req, res) {
+  list = async (_, res) => {
     try {
-      const users = await this.service.getAllUsers();
+      const users = await this.service.list();
       return res.status(200).json(users);
     } catch (error) {
       return res.status(500).json({ message: 'Erro ao buscar usuários.', error: error });
@@ -31,7 +39,7 @@ class UserController {
    * @param {express.Response} res - Express response object.
    * @returns {express.Response} - Response object with the status and success or error message.
    */
-  async deleteUser(req, res) {
+  delete = async (req, res) => {
     try {
       const { id } = req.body;
       const result = await this.service.deleteUserById(id);

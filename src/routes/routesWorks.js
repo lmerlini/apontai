@@ -6,7 +6,6 @@ const WorkController = require('../controllers/WorkController');
  */
 class WorkRoutes {
 
-    PREFIX = "works"
 
     /**
      * Initializes a new instance of the workRouter class.
@@ -14,23 +13,23 @@ class WorkRoutes {
     constructor() {
         this.controller = new WorkController();
         this.router = express.Router();
-        this.initializeRoutes(this.PREFIX);
+        this.initializeRoutes();
     }
 
     /**
      * Initializes the routes for the work.
      * @param {string} uri - The prefix for the work routes.
      */
-    initializeRoutes(uri) {
+    initializeRoutes() {
 
-        this.router.get(`/${uri}/list`, (req, res) => this.controller.list(req, res));
-        this.router.get(`/${uri}/perdate`, (req, res) => this.controller.listPerDate(req, res));
-        this.router.get(`/${uri}/list/project/:project_id`, (req, res) => this.controller.getProjectsById(req, res));
-        this.router.post(`/${uri}/create`, (req, res) => this.controller.create(req, res));
-        this.router.delete(`/${uri}/delete`, (req, res) => this.controller.destroy(req, res));
-        this.router.patch(`/${uri}/update/:work_id/:project_id`, (req, res) => this.controller.update(req, res));
+        this.router.get(`/list`, this.controller.list);
+        this.router.get(`/perdate`, this.controller.listPerDate);
+        this.router.get(`/list/project/:project_id`, this.controller.getProjectsById);
+        this.router.post(`/create`, this.controller.create);
+        this.router.delete(`/delete`, this.controller.destroy);
+        this.router.patch(`/update/:work_id/:project_id`, this.controller.update);
 
-        this.router.use(`/${uri}/*`, (_, res, next) => {
+        this.router.use(`/*`, (_, res, next) => {
             res.status(404).json({ "message": 'Página não encontrada!' });
         });
     }

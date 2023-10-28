@@ -8,7 +8,7 @@ class ProjectRepository {
     }
 
     async list() {
-        return await this.model.findAll()
+        return await this.model.findAll() 
     }
 
     async findById(project_id) {
@@ -31,7 +31,7 @@ class ProjectRepository {
         });
 
         if (!result)
-            throw new Error("Projeto não encontrado!")
+            throw new Error("Projeto não encontrado!")        //efetuar camanda de erros no
 
 
 

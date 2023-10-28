@@ -21,7 +21,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  async login(req, res) {
+  login = async (req, res) => {
     try {
       const { token, refreshToken } = await this.service.login(req, res);
 
@@ -41,7 +41,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  async register(req, res) {
+  register = async (req, res) => {
     try {
       const user = await this.service.register(req.body);
       return res.json(user);
@@ -56,7 +56,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  async logout(req, res) {
+  logout = async (req, res) => {
     try {
       await this.service.logout(req);
       res.status(200).json({ message: "Desconectado com sucesso" });
@@ -71,7 +71,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  async getCurrentUser(req, res) {
+  getCurrentUser = async (req, res) => {
     try {
       const user = await this.service.getCurrentUser(req.headers['authorization']);
       if (!user) {
@@ -89,7 +89,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  async verifyToken(req, res) {
+  verifyToken = async (req, res) => {
     try {
       const token = this.service.hasToken(req.headers['authorization']);
       this.service.verifyToken(token);
@@ -105,7 +105,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  async refreshToken(req, res) {
+  refreshToken = async (req, res) => {
     try {
       const { refresh_token } = req.body;
       if (!refresh_token) {
