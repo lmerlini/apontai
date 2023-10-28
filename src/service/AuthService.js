@@ -8,7 +8,7 @@ require('dotenv').config();
 class AuthService {
 
   constructor() {
-    this.authRepo = new AuthRepository()
+    this.auth = new AuthRepository()
     this.userRepo = new UserRepository()
   }
 
@@ -38,6 +38,8 @@ class AuthService {
           if (err) {
             reject(err);
           }
+
+          await this.auth.updateLastLogin(user.id);
 
           const token = jwt.sign({ id: user.id, name: user.name, device: req.headers['user-agent'] }, process.env.JWT_SECRET, {
             expiresIn: tokenExpiry
@@ -87,7 +89,7 @@ class AuthService {
   * @returns {Promise<Object>} The created user object.
   */
   async register(userData) {
-    return this.authRepo.createUser(userData);
+    return this.auth.createUser(userData);
   }
 
   /**

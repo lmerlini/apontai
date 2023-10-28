@@ -19,7 +19,7 @@ class CustomerController {
      * @param {Object} _ - The request object. Not used in this function but kept for Express middleware signature.
      * @param {Object} res - The response object.
      */
-    async list(_, res) {
+    list = async (_, res) => {
         try {
             const customer = await this.service.list();
             res.status(200).json(customer);
@@ -37,7 +37,7 @@ class CustomerController {
      * @param {Object} req - The request object.
      * @param {Object} res - The response object.
      */
-    async create(req, res) {
+    create = async (req, res) => {
         const customerData = req.body;
 
         try {
@@ -57,27 +57,12 @@ class CustomerController {
      * @param {Object} req - The request object.
      * @param {Object} res - The response object.
      */
-    async update(req, res) {
+    update = async (req, res) => {
         const { id } = req.params;
         const customer = await this.service.update(id, req.body);
         res.status(200).json({ customer: customer });
     }
 
-    /**
-     * Deletes a customer by its ID.
-     * @async
-     * @param {Object} req - The request object.
-     * @param {Object} res - The response object.
-     */
-    async delete(req, res) {
-        const { id } = req.params;
-        try {
-            const message = await this.service.delete(id);
-            res.status(200).json({ message });
-        } catch (error) {
-            res.status(500).json({ message: 'Erro ao deletar o Cliente.' });
-        }
-    }
 
     /**
      * Deletes multiple clients provided an array of IDs.
@@ -85,7 +70,7 @@ class CustomerController {
      * @param {Object} req - The request object.
      * @param {Object} res - The response object.
      */
-    async deleteClients(req, res) {
+    delete = async (req, res) => {
         try {
             const message = await this.service.delete(req.body.id);
             res.status(200).json({ message });

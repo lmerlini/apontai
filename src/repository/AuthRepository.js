@@ -10,6 +10,15 @@ class AuthRepository {
   }
 
   /**
+   * Update last login 
+   * @param {BigInteger} user_id 
+   */
+  async updateLastLogin(user_id) {
+    const currentDate = new Date();
+    await this.model.update({ last_login: currentDate }, { where: { id: user_id } });
+  }
+
+  /**
    * Creates a new user record in the database.
    * @param {Object} param0 - Object containing user details.
    * @param {string} param0.username - The desired username for the new user.

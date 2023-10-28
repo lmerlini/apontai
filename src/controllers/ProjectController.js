@@ -7,28 +7,31 @@ class ProjectController {
         this.service = new ProjectService()
     }
 
-    async list(_, res) {
+
+    list = async (_, res) => {
         try {
-            const result = await this.service.list()
-            return res.status(200).json(result)
+            const result = await this.service.list();
+            return res.status(200).json(result);
         } catch (error) {
-            return res.status(500).json({ message: "Erro ao listar projetos!", error: error })
+            return res.status(500).json({ message: "Erro ao listar projetos!" })
         }
     }
 
-    async create(req, res) {
+    create = async (req, res) => {
         try {
             const result = await this.service.create(req.body)
             return res.status(200).json(result)
         } catch (error) {
             return res.status(500).json({ message: "Erro ao criar projeto!", error: error })
+
         }
     }
 
-    async update(req, res) {
+    update = async (req, res) => {
         try {
 
-            const { project_id, accountable_id } = req.params
+            const { project_id } = req.params
+            const { accountable_id } = req.body
             const result = await this.service.update(project_id, accountable_id, req.body)
             return res.status(200).json(result)
         } catch (error) {
@@ -36,7 +39,7 @@ class ProjectController {
         }
     }
 
-    async delete(req, res) {
+    delete = async (req, res) => {
         try {
             const result = await this.service.delete(req.body.id)
             if (!result) {

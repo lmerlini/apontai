@@ -62,11 +62,11 @@ app.use(passport.session());
 /**
  * Application routes.
  */
-app.use(`/${PREFIX}`, require('./routes/routesAuthenticate'));
-app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesUsers'));
-app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesCustomers'));
-app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesWorks'));
-app.use(`/${PREFIX}`, ensureAuthenticated, require('./routes/routesProjects'))
+app.use(`/${PREFIX}/auth`, require('./routes/routesAuthenticate'));
+app.use(`/${PREFIX}/users`, ensureAuthenticated, require('./routes/routesUsers'));
+app.use(`/${PREFIX}/customers`, ensureAuthenticated, require('./routes/routesCustomers'));
+app.use(`/${PREFIX}/works`, ensureAuthenticated, require('./routes/routesWorks'));
+app.use(`/${PREFIX}/projects`, ensureAuthenticated, require('./routes/routesProjects'))
 
 /**
  * Start the server.

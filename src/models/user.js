@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   class User extends Model {
 
     static associate(models) {
-      this.hasMany(models.Work, { foreignKey: 'user_id', as: 'works' }); 
+      this.hasMany(models.Work, { foreignKey: 'user_id', as: 'works' });
     }
 
     async isValidPassword(password) {
@@ -32,7 +32,10 @@ module.exports = (sequelize) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        isEmail: true
+      }
     },
     password: {
       type: DataTypes.STRING,
@@ -41,6 +44,18 @@ module.exports = (sequelize) => {
         const hashedPassword = bcrypt.hashSync(value, 10);
         this.setDataValue('password', hashedPassword);
       }
+    },
+    photo: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: 1
+    },
+    last_login:{
+      type: DataTypes.DATE
     }
   }, {
     sequelize,

@@ -1,49 +1,32 @@
 const express = require('express');
 const AuthController = require('../controllers/AuthController');
 
+
+
 /**
  * Class representing the authentication routes.
  */
 class Authenticate {
 
-    /**
-     * Prefix for authentication routes.
-     * @type {string}
-     */
-    PREFIX = "auth";
 
     /**
      * Sets up the authentication routes.
      */
     constructor() {
-        /**
-         * Instance of the AuthController.
-         * @type {AuthController}
-         */
         this.controller = new AuthController();
-
-        /**
-         * Express router for authentication routes.
-         * @type {express.Router}
-         */
         this.router = express.Router();
-
-        this.initializeRoutes(this.PREFIX);
+        this.initializeRoutes();
     }
 
-    /**
-     * Initializes authentication-related routes.
-     * @param {string} uri - The URI prefix for authentication routes.
-     */
-    initializeRoutes(uri) {
-        this.router.post(`/${uri}/login`, (req, res, next) => this.controller.login(req, res, next));
-        this.router.post(`/${uri}/verify-token`, (req, res, next) => this.controller.verifyToken(req, res, next));
-        this.router.post(`/${uri}/refresh-token`, (req, res, next) => this.controller.refreshToken(req, res, next));
-        this.router.post(`/${uri}/register`, (req, res, next) => this.controller.register(req, res, next));
-        this.router.post(`/${uri}/logout`, (req, res, next) => this.controller.logout(req, res, next));
 
-        // Middleware to handle 404 errors for authentication routes.
-        this.router.use(`/${uri}/*`, (_, res) => {
+    initializeRoutes() {
+        this.router.post(`/login`, this.controller.login);
+        this.router.post(`/verify-token`, this.controller.verifyToken);
+        this.router.post(`/refresh-token`, this.controller.refreshToken);
+        this.router.post(`/register`, this.controller.register);
+        this.router.post(`/logout`, this.controller.logout);
+
+        this.router.use(`/*`, (_, res) => {
             res.status(404).json({ "message": 'Página não encontrada!' });
             return;
         });

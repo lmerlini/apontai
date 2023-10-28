@@ -7,11 +7,6 @@ const AuthController = require('../controllers/AuthController')
  */
 class UserRouter {
 
-    /** 
-     * @property {string} PREFIX - The prefix used for the user routes.
-     */
-    PREFIX = "users"
-
     /**
      * Initializes a new instance of the UserRouter class.
      */
@@ -19,31 +14,15 @@ class UserRouter {
         this.controller = new UserController();
         this.authController = new AuthController()
         this.router = express.Router()
-        this.initializeRoutes(this.PREFIX)
+        this.initializeRoutes()
     }
 
-    /**
-     * Initializes the routes for the user.
-     * @param {string} uri - The prefix for the user routes.
-     */
-    initializeRoutes(uri) {
-        /**
-         * Retrieves a list of all users.
-         */
-        this.router.get(`/${uri}/list`, (req, res) => this.controller.getAllUsers(req, res));
-        /**
-         *  Deletes a specific user.
-         */
-        this.router.delete(`/${uri}/delete`, (req, res) => this.controller.deleteUser(req, res));
-        /**
-         * Retrieves the currently authenticated user.
-         */
-        this.router.get(`/${uri}/me`, (req, res) => this.authController.getCurrentUser(req, res))
-
-        /**
-         * Default route that captures all non-defined user routes and returns a 404.
-         */
-        this.router.use(`/${uri}/*`, (_, res, next) => {
+    initializeRoutes() {
+        this.router.get(`/list`, this.controller.list);
+        this.router.post(`/create`, this.controller.create);
+        this.router.delete(`/delete`, this.controller.delete);
+        this.router.get(`/me`, this.authController.getCurrentUser)
+        this.router.use(`/*`, (_, res, next) => {
             res.status(404).json({ "message": 'Página não encontrada!' });
         });
 
