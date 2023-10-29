@@ -83,14 +83,6 @@ class AuthService {
     return this.generateAccessToken({ id: decoded.id });
   }
 
-  /**
-   * Register a new user. 
-  * @param {Object} userData - The data of the user to be registered.
-  * @returns {Promise<Object>} The created user object.
-  */
-  async register(userData) {
-    return this.auth.createUser(userData);
-  }
 
   /**
    * Log out the authenticated user.

@@ -49,7 +49,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',  // Ensure HTTPS is used in production
-        maxAge: 1000 * 60 * 60 * 24 // 1 day
+        maxAge: 1000 * 60 * 60 * 24 
     }
 }));
 
@@ -78,6 +78,7 @@ const server = app.listen(PORT, () => {
         console.log(`Server is running on production https://localhost:${PORT}/${PREFIX}`);
     }
 });
+
 
 /**
  * Export the server for using ins tests

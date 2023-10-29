@@ -36,21 +36,6 @@ class AuthController {
   }
 
   /**
-   * Handles the user registration request.
-   * @async
-   * @param {Object} req - The request object.
-   * @param {Object} res - The response object.
-   */
-  register = async (req, res) => {
-    try {
-      const user = await this.service.register(req.body);
-      return res.json(user);
-    } catch (error) {
-      res.status(500).json({ message: "Erro ao efetuar o registro do usuário" });
-    }
-  }
-
-  /**
    * Handles the logout request.
    * @async
    * @param {Object} req - The request object.
@@ -59,9 +44,9 @@ class AuthController {
   logout = async (req, res) => {
     try {
       await this.service.logout(req);
-      res.status(200).json({ message: "Desconectado com sucesso" });
+      return res.status(200).json({ message: "Desconectado com sucesso" });
     } catch (error) {
-      res.status(500).json({ message: "Erro ao desconectar" });
+      return res.status(500).json({ message: "Erro ao desconectar" });
     }
   }
 
@@ -79,7 +64,7 @@ class AuthController {
       }
       return res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: "Erro ao retornar dados do usuário" });
+      return res.status(500).json({ message: "Erro ao retornar dados do usuário" });
     }
   }
 
@@ -115,7 +100,7 @@ class AuthController {
       const newToken = await this.service.refreshAccessToken(refresh_token);
       return res.status(200).json({ token: newToken });
     } catch (error) {
-      res.status(500).json({ message: "Erro ao atualizar o token!" });
+      return res.status(500).json({ message: "Erro ao atualizar o token!" });
     }
   }
 }

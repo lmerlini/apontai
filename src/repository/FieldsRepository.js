@@ -20,6 +20,7 @@ class FieldsRepository {
 
     getAttributes(options = {}) {
         const { include = [], exclude = [] } = options;
+
         return {
             attributes: {
                 include: [...this.#defaultInclude, ...include],

@@ -40,7 +40,7 @@ class WorkService {
      * @returns {Promise<Array>} Array of work entries.
      */
     async list(userId) {
-        return this.work.findByUserId(userId);
+        return this.work.list(userId);
     }
 
     /**
@@ -52,13 +52,9 @@ class WorkService {
      * @returns {Promise<Array>} Array of work entries.
      */
     async listPerDate(userId, startDate, endDate) {
-        let result = await this.work.find({
-            where: {
-                user_id: userId,
-                service_date:
-                {
-                    [Op.between]: [new Date(startDate), new Date(endDate)]
-                }
+        let result = await this.work.list(userId, {
+            service_date: {
+                [Op.between]: [new Date(startDate), new Date(endDate)]
             }
         });
         return result;

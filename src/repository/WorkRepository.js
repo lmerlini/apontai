@@ -1,4 +1,6 @@
 const { Work } = require('../models');
+const FieldsRepository = require('./FieldsRepository')
+
 
 /**
  * Repository for handling operations related to the Work model.
@@ -11,22 +13,7 @@ class WorkRepository {
      */
     constructor() {
         this.model = Work
-    }
-
-    /**
-     * Finds work entries based on given parameters.
-     * @async
-     * @param {Object} [params={}] - Parameters to filter the results.
-     * @returns {Promise<Array>} Array of work entries.
-     */
-    async find(params = {}) {
-        const results = await this.model.findAll(params);
-
-        return results.map(entry => {
-            const plainEntry = entry.get({ plain: true });
-            plainEntry.daily_total = entry.daily_total;
-            return plainEntry;
-        });
+        this.fields = new FieldsRepository()
     }
 
     /**
@@ -35,9 +22,10 @@ class WorkRepository {
      * @param {number} userId - ID of the user.
      * @returns {Promise<Array>} Array of work entries with the daily total included.
      */
-    async findByUserId(userId) {
+    async list(userId, params) {
         const results = await this.model.findAll({
-            where: { user_id: userId }
+            where: { user_id: userId, ...params },
+            ... this.fields.getAttributes()
         });
 
         return this.generateTotalDaily(results);
@@ -47,8 +35,9 @@ class WorkRepository {
         return this.model.findAll({
             where: {
                 project_id: project_id,
-                user_id: user_id  
-            }
+                user_id: user_id
+            },
+            ...this.fields.getAttributes()
         })
     }
 

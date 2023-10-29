@@ -22,8 +22,7 @@ class Authenticate {
     initializeRoutes() {
         this.router.post(`/login`, this.controller.login);
         this.router.post(`/verify-token`, this.controller.verifyToken);
-        this.router.post(`/refresh-token`, this.controller.refreshToken);
-        this.router.post(`/register`, this.controller.register);
+        this.router.post(`/refresh-token`, this.controller.refreshToken);        
         this.router.post(`/logout`, this.controller.logout);
 
         this.router.use(`/*`, (_, res) => {

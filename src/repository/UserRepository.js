@@ -6,7 +6,6 @@ const FieldsRepository = require('./FieldsRepository')
  */
 class UserRepository {
 
-
     constructor() {
         this.model = User
         this.fields = new FieldsRepository().exclude([

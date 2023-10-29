@@ -8,7 +8,7 @@
     "db:refresh": "sequelize-cli db:migrate:undo:all && sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "db:migrate": "sequelize-cli db:migrate && sequelize-cli db:seed:all",
     "generate-docs": "jsdoc -c jsdoc.json -R README.md",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

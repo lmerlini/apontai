@@ -9,13 +9,21 @@ class UserController {
     this.service = new UserService()
   }
 
-  create = async(req, res)=>{
+  /**
+  * Handles the user registration request.
+  * @async
+  * @param {Object} req - The request object.
+  * @param {Object} res - The response object.
+  */
+  create = async (req, res) => {
     try {
-      
+      const user = await this.service.create(req.body);
+      return res.json(user);
     } catch (error) {
-      
+      return res.status(500).json({ message: "Erro ao efetuar o registro do usuário" });
     }
   }
+
   /**
   * Retrieves all users from the database.
   * 

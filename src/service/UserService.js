@@ -10,6 +10,15 @@ class UserService {
     return await this.repository.list();
   }
 
+  /**
+   * Register a new user. 
+  * @param {Object} userData - The data of the user to be registered.
+  * @returns {Promise<Object>} The created user object.
+  */
+  async create(userData) {
+    return this.repository.create(userData);
+  }
+
   async delete(id) {
     const result = await this.repository.delete(id);
     if (result) {
