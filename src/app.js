@@ -2,8 +2,10 @@
  * Module dependencies.
  * @description Application entry point
  */
+require('./config/globals')
 require('dotenv').config();
 const express = require('express');
+const errorHandler = require('./middlewares/errors/errorHandler');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('./config/passport');
@@ -68,6 +70,10 @@ app.use(`/${PREFIX}/users`, ensureAuthenticated, require('./routes/routesUsers')
 app.use(`/${PREFIX}/customers`, ensureAuthenticated, require('./routes/routesCustomers'));
 app.use(`/${PREFIX}/works`, ensureAuthenticated, require('./routes/routesWorks'));
 app.use(`/${PREFIX}/projects`, ensureAuthenticated, require('./routes/routesProjects'))
+
+
+
+app.use(errorHandler);
 
 /**
  * Start the server.

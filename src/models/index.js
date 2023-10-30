@@ -8,13 +8,12 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const sequelize = require('../config/connection');
+
 const basename = path.basename(__filename);
 const config = require(__dirname + '/../config/config.js')[process.env.NODE_ENV];
 
 const dbInstance = {};
-
-// Initialize sequelize with the database configuration.
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 // Filter model files, excluding the current file and test files.
 const modelFiles = fs.readdirSync(__dirname)

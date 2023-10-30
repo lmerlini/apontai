@@ -19,15 +19,12 @@ class CustomerController {
      * @param {Object} _ - The request object. Not used in this function but kept for Express middleware signature.
      * @param {Object} res - The response object.
      */
-    list = async (_, res) => {
+    list = async (_, res, next) => {
         try {
             const customer = await this.service.list();
             res.status(200).json(customer);
         } catch (error) {
-            res.status(500).json({
-                message: 'Erro ao retornar dados dos clientes',
-                error: error
-            });
+            next(error)
         }
     }
 
@@ -37,17 +34,14 @@ class CustomerController {
      * @param {Object} req - The request object.
      * @param {Object} res - The response object.
      */
-    create = async (req, res) => {
+    create = async (req, res, next) => {
         const customerData = req.body;
 
         try {
             const customer = await this.service.create(customerData);
             res.status(201).json(customer);
         } catch (error) {
-            if (error.errors)
-                res.status(500).json({ error: error.errors });
-            else
-                res.status(500).json({ error: "Ocorreu um erro, tente novamente!!!" });
+            next(error)
         }
     }
 
@@ -57,10 +51,14 @@ class CustomerController {
      * @param {Object} req - The request object.
      * @param {Object} res - The response object.
      */
-    update = async (req, res) => {
-        const { id } = req.params;
-        const customer = await this.service.update(id, req.body);
-        res.status(200).json({ customer: customer });
+    update = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const customer = await this.service.update(id, req.body);
+            res.status(200).json({ customer: customer });
+        } catch (error) {
+            next(error)
+        }
     }
 
 
@@ -70,12 +68,12 @@ class CustomerController {
      * @param {Object} req - The request object.
      * @param {Object} res - The response object.
      */
-    delete = async (req, res) => {
+    delete = async (req, res, next) => {
         try {
             const message = await this.service.delete(req.body.id);
             res.status(200).json({ message });
         } catch (error) {
-            res.status(500).json({ message: 'Erro ao deletar o Cliente.', error });
+            next(error)
         }
     }
 }

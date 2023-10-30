@@ -31,9 +31,7 @@ class ProjectRepository {
         });
 
         if (!result)
-            throw new Error("Projeto não encontrado!")        //efetuar camanda de erros no
-
-
+            throw new Error("Projeto não encontrado!")        
 
         return await this.model.update(data, {
             where: { id: project_id, accountable_id: accountable_id }

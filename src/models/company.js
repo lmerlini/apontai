@@ -9,7 +9,18 @@ module.exports = (sequelize) => {
   }
 
   Company.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        notEmpty: {
+          msg: "O nome não pode estar vazio"
+        },
+        len: [3, 100]
+      },
+      comment: "Nome da empresa."
+    },
     nick_name: DataTypes.STRING,
     cnpj: DataTypes.STRING,
     enrollment: DataTypes.STRING,

@@ -21,7 +21,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  login = async (req, res) => {
+  login = async (req, res, next) => {
     try {
       const { token, refreshToken } = await this.service.login(req, res);
 
@@ -31,7 +31,7 @@ class AuthController {
         return res.status(401).send({ message: 'Não autorizado' });
       }
     } catch (error) {
-      res.status(500).json({ message: "Erro ao efetuar login" });
+      next(error)
     }
   }
 
@@ -41,12 +41,12 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  logout = async (req, res) => {
+  logout = async (req, res, next) => {
     try {
       await this.service.logout(req);
       return res.status(200).json({ message: "Desconectado com sucesso" });
     } catch (error) {
-      return res.status(500).json({ message: "Erro ao desconectar" });
+      next(error)
     }
   }
 
@@ -56,7 +56,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  getCurrentUser = async (req, res) => {
+  getCurrentUser = async (req, res, next) => {
     try {
       const user = await this.service.getCurrentUser(req.headers['authorization']);
       if (!user) {
@@ -64,7 +64,7 @@ class AuthController {
       }
       return res.status(200).json(user);
     } catch (error) {
-      return res.status(500).json({ message: "Erro ao retornar dados do usuário" });
+      next(error)
     }
   }
 
@@ -74,13 +74,13 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  verifyToken = async (req, res) => {
+  verifyToken = async (req, res, next) => {
     try {
       const token = this.service.hasToken(req.headers['authorization']);
       this.service.verifyToken(token);
       return res.status(200).json({ message: 'Token válido.' });
     } catch (error) {
-      return res.status(401).json({ message: error.message });
+      next(error)
     }
   }
 
@@ -90,7 +90,7 @@ class AuthController {
    * @param {Object} req - The request object.
    * @param {Object} res - The response object.
    */
-  refreshToken = async (req, res) => {
+  refreshToken = async (req, res, next) => {
     try {
       const { refresh_token } = req.body;
       if (!refresh_token) {
@@ -100,7 +100,7 @@ class AuthController {
       const newToken = await this.service.refreshAccessToken(refresh_token);
       return res.status(200).json({ token: newToken });
     } catch (error) {
-      return res.status(500).json({ message: "Erro ao atualizar o token!" });
+      next(error)
     }
   }
 }
