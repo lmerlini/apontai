@@ -6,6 +6,7 @@ const CostController = require('../controllers/CostController');
  */
 class CostsRoutes {
 
+   
     /**
      * Initializes a new instance of the CostsRouter class.
      */

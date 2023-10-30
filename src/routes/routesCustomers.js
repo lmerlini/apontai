@@ -6,6 +6,7 @@ const CustomerController = require('../controllers/CustomerController');
  */
 class CustomerRoutes {
 
+
     /**
      * Sets up the customer routes.
      */

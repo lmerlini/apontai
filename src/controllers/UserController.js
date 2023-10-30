@@ -24,21 +24,6 @@ class UserController {
     }
   }
 
-  /**
-  * Retrieves all users from the database.
-  * 
-  * @param {express.Request} req - Express request object.
-  * @param {express.Response} res - Express response object.
-  * @returns {express.Response} - Response object with the status and the list of users or error message.
-  */
-  list = async (_, res, next) => {
-    try {
-      const users = await this.service.list();
-      return res.status(200).json(users);
-    } catch (error) {
-      next(error)
-    }
-  }
 
   /**
    * Deletes a user by ID.

@@ -13,13 +13,6 @@ class UserRepository {
         ])
     }
 
-    /**
-     * Fetches all user records from the database.
-     * @returns {Promise<Array>} An array of User instances.
-     */
-    async list() {
-        return await this.model.findAll(this.fields.getAttributes());
-    }
 
     /**
      * Fetches a specific user by their ID.
