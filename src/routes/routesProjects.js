@@ -13,7 +13,6 @@ class ProjectRoutes {
     }
 
     initializeRoutes() {
-
         this.router.get(`/list`, this.controller.list);
         this.router.post(`/create`, this.controller.create);
         this.router.delete(`/delete`, this.controller.delete);

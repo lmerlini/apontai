@@ -14,11 +14,13 @@ module.exports = (sequelize) => {
   Costs.init({
     work_id: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    comprovante: DataTypes.STRING,
+    receipt: DataTypes.STRING,
     value: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Costs',
+    tableName: 'costs',
+    freezeTableName: true,
     paranoid: true,
     timestamps: true
   });

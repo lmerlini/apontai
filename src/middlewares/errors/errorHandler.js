@@ -18,10 +18,6 @@ module.exports = async function errorHandler(err, req, res, next) {
         cpuModel: getCpuModel()
     };
 
-    console.log('systemInfo', systemInfo.memoryUsage);
-    console.log('modelo', systemInfo.cpuModel);
-
-
     try {
         await Log.create({
             userId: req.user && req.user.id ? req.user.id : null,

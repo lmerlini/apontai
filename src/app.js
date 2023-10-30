@@ -69,6 +69,7 @@ app.use(`/${PREFIX}/companies`, ensureAuthenticated, require('./routes/routeComp
 app.use(`/${PREFIX}/users`, ensureAuthenticated, require('./routes/routesUsers'));
 app.use(`/${PREFIX}/customers`, ensureAuthenticated, require('./routes/routesCustomers'));
 app.use(`/${PREFIX}/works`, ensureAuthenticated, require('./routes/routesWorks'));
+app.use(`/${PREFIX}/costs`, ensureAuthenticated, require('./routes/routesCosts'));
 app.use(`/${PREFIX}/projects`, ensureAuthenticated, require('./routes/routesProjects'))
 
 

@@ -41,6 +41,16 @@ class WorkRepository {
         })
     }
 
+    async findWorkId(work_id) {
+        return this.model.findAll({
+            where: {
+                id: work_id
+            },
+            ...this.fields.getAttributes()
+        })
+    }
+
+
     /**
      * Creates a new work entry.
      * @async
