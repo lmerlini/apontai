@@ -36,7 +36,13 @@ class UserRepository {
      * @returns {Promise<Object>} The created User instance.
      */
     async create(data) {
-        return await this.model.create(data);
+        try {
+            return await this.model.create(data);
+        } catch (error) {
+            //verifiquei que consigo coletar o erro mapeando o objeto sequelize.ValidationError
+            //TODO.: Criar um middleware de erros para repositories
+            console.log(error);
+        }
     }
 
     /**

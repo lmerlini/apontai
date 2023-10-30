@@ -63,6 +63,7 @@ app.use(passport.session());
  * Application routes.
  */
 app.use(`/${PREFIX}/auth`, require('./routes/routesAuthenticate'));
+app.use(`/${PREFIX}/companies`, ensureAuthenticated, require('./routes/routeCompanies.js'))
 app.use(`/${PREFIX}/users`, ensureAuthenticated, require('./routes/routesUsers'));
 app.use(`/${PREFIX}/customers`, ensureAuthenticated, require('./routes/routesCustomers'));
 app.use(`/${PREFIX}/works`, ensureAuthenticated, require('./routes/routesWorks'));

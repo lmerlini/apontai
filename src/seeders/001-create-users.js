@@ -5,6 +5,7 @@ module.exports = {
   up: (queryInterface, _) => {
     return queryInterface.bulkInsert('users', [
       {
+        company_id: 1,
         username: 'administrator',
         password: bcrypt.hashSync('admin', 10),
         email: 'administrator@example.com',
@@ -14,6 +15,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        company_id: 1,
         username: 'admin',
         password: bcrypt.hashSync('admin', 10),
         email: 'luis.merlini@example.com',
@@ -22,7 +24,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
-     
+
     ], {});
   },
 

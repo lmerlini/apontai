@@ -8,9 +8,15 @@ module.exports = (sequelize) => {
         foreignKey: 'user_id',
         as: 'user',
       });
+      
       this.belongsTo(models.Project, {
         foreignKey: 'project_id',
         as: 'project',
+      });
+
+      this.hasMany(models.Costs, {
+        foreignKey: 'work_id',
+        as: 'costs'
       });
     }
 
