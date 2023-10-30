@@ -67,8 +67,8 @@ class WorkService {
      * @returns {Promise<string>} Success message.
      * @throws {Error} Throws an error if the work entry does not exist.
      */
-    async destroy(id) {
-        const result = await this.work.deleteById(id);
+    async delete(id) {
+        const result = await this.work.delete(id);
         if (result) {
             return 'Entrada de trabalho deletada com sucesso!';
         } else {

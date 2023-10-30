@@ -69,10 +69,10 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    destroy = async (req, res) => {
+    delete = async (req, res) => {
         try {
             this._preprocessRequest(req);
-            const message = await this.service.destroy(req.body.id);
+            const message = await this.service.delete(req.body.id);
             return res.status(200).json({ message });
         } catch (error) {
             console.error('Erro ao deletar a entrada de trabalho:', error);

@@ -26,7 +26,7 @@ class WorkRoutes {
         this.router.get(`/perdate`, this.controller.listPerDate);
         this.router.get(`/list/project/:project_id`, this.controller.getProjectsById);
         this.router.post(`/create`, this.controller.create);
-        this.router.delete(`/delete`, this.controller.destroy);
+        this.router.delete(`/delete`, this.controller.delete);
         this.router.patch(`/update/:work_id/:project_id`, this.controller.update);
 
         this.router.use(`/*`, (_, res, next) => {

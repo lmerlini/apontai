@@ -57,7 +57,7 @@ class WorkRepository {
      * @param {number} id - ID of the work entry.
      * @returns {Promise<number>} The number of destroyed rows.
      */
-    async deleteById(id) {
+    async delete(id) {
         return await this.model.destroy({
             where: { id }
         });

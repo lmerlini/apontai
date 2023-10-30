@@ -10,6 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         comment: "Identificador único para cada usuário."
       },
+      company_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        comment: "Referência para empresa associado ao usuário."
+      },
       username: {
         type: Sequelize.STRING,
         unique: true,
@@ -76,8 +81,22 @@ module.exports = {
         comment: "Data e hora de exclusão do registro, caso tenha sido excluído."
       }
     });
+
+    await queryInterface.addConstraint('users', {
+      fields: ['company_id'],
+      type: 'foreign key',
+      name: 'fk_users_companies_id',
+      references: {
+        table: 'companies',
+        field: 'id'
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
+    });
   },
   down: async (queryInterface, Sequelize) => {
+
+    await queryInterface.removeConstraint('users', 'fk_users_companies_id');
     await queryInterface.dropTable('users');
   }
 };

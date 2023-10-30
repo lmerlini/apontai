@@ -7,7 +7,9 @@ module.exports = (sequelize) => {
   class User extends Model {
 
     static associate(models) {
+      this.belongsTo(models.Company, { foreignKey: 'company_id', as: 'company' });
       this.hasMany(models.Work, { foreignKey: 'user_id', as: 'works' });
+
     }
 
     async isValidPassword(password) {
@@ -16,25 +18,52 @@ module.exports = (sequelize) => {
   }
 
   User.init({
+    company_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "O campo company_id é obrigatório."
+        }
+      }
+    },
     username: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "O campo username é obrigatório."
+        }
+      }
     },
     first_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "O campo first_name é obrigatório."
+        }
+      }
     },
     last_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "O campo last_name é obrigatório."
+        }
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true
+        isEmail: true,
+        notEmpty: {
+          msg: "O campo email é obrigatório."
+        }
       }
     },
     password: {
@@ -54,7 +83,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       defaultValue: 1
     },
-    last_login:{
+    last_login: {
       type: DataTypes.DATE
     }
   }, {
