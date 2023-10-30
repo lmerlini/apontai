@@ -19,13 +19,13 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    list = async (req, res) => {
+    list = async (req, res, next) => {
         try {
             this._preprocessRequest(req);
             const entries = await this.service.list(req.body.user_id);
             return res.status(200).json(entries);
         } catch (error) {
-            return res.status(500).json({ message: 'Erro ao buscar apontamentos.', error: error });
+            next(error)
         }
     }
 
@@ -35,11 +35,15 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    listPerDate = async (req, res) => {
-        this._preprocessRequest(req);
-        const { startDate, endDate } = req.body;
-        const totalWork = await this.service.listPerDate(req.body.user_id, startDate, endDate);
-        return res.status(200).json(totalWork);
+    listPerDate = async (req, res, next) => {
+        try {
+            this._preprocessRequest(req);
+            const { startDate, endDate } = req.body;
+            const totalWork = await this.service.listPerDate(req.body.user_id, startDate, endDate);
+            return res.status(200).json(totalWork);
+        } catch (error) {
+            next(error)
+        }
     }
 
     /**
@@ -48,7 +52,7 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    create = async (req, res) => {
+    create = async (req, res, next) => {
         try {
             this._preprocessRequest(req);
             const { project_id } = req.body;
@@ -69,14 +73,13 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    delete = async (req, res) => {
+    delete = async (req, res, next) => {
         try {
             this._preprocessRequest(req);
             const message = await this.service.delete(req.body.id);
             return res.status(200).json({ message });
         } catch (error) {
-            console.error('Erro ao deletar a entrada de trabalho:', error);
-            return res.status(500).json({ message: 'Erro ao deletar a entrada de trabalho.' });
+            next(error)
         }
     }
 
@@ -86,7 +89,7 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    update = async (req, res) => {
+    update = async (req, res, next) => {
         try {
             this._preprocessRequest(req);
             const { work_id, project_id } = req.params;
@@ -108,7 +111,7 @@ class WorkController {
      * @param {Object} req - The Express request object.
      * @param {Object} res - The Express response object.
      */
-    getProjectsById = async (req, res) => {
+    getProjectsById = async (req, res, next) => {
         try {
             this._preprocessRequest(req);
             const { project_id } = req.params;
@@ -126,7 +129,7 @@ class WorkController {
             }
 
         } catch (error) {
-            return res.status(500).json({ message: "Erro ao retornar Projetos.", error: error });
+            next(error)
         }
     }
 

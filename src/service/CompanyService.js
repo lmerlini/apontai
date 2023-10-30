@@ -14,7 +14,13 @@ class CompanyService {
     }
 
     async delete(id) {
-        return this.repository.delete(id);
+        const result = this.repository.delete(id);
+
+        if (result) {
+            return 'Empresa Deletada com sucesso!';
+        } else {
+            throw new Error(`Erro ao deletar empresa com id ${id}.`);
+        }
     }
 
     async update(id, data) {

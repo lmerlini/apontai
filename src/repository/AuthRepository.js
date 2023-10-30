@@ -20,13 +20,8 @@ class AuthRepository {
 
 
   async delete(user_id) {
-    try {
-
-      const user = await this.model.destroy({ where: { id: user_id } })
-      return user
-    } catch (error) {
-      return error
-    }
+    const user = await this.model.destroy({ where: { id: user_id } })
+    return user
   }
 
   /**
@@ -36,15 +31,11 @@ class AuthRepository {
    * @throws {Error} Throws an error if the user is not found or if there's any other issue.
    */
   async findById(id) {
-    try {
-      const user = await this.model.findByPk(id);
-      if (!user) {
-        throw new Error('Usuário não encontrado');
-      }
-      return user;
-    } catch (error) {
-      throw error;
+    const user = await this.model.findByPk(id);
+    if (!user) {
+      throw new Error('Usuário não encontrado');
     }
+    return user;
   }
 }
 

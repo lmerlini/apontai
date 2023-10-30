@@ -1,8 +1,6 @@
 const express = require('express');
 const AuthController = require('../controllers/AuthController');
 
-
-
 /**
  * Class representing the authentication routes.
  */
