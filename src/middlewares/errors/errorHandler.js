@@ -37,7 +37,7 @@ module.exports = async function errorHandler(err, req, res, next) {
             environment: process.env.NODE_ENV || 'development',
             memoryUsage: systemInfo.memoryUsage || null,
             cpuLoad: systemInfo.cpuModel || null,
-            appVersion: '1.0.0',            
+            appVersion: process.env.VERSION,            
         });
 
         res.status(err.status || 500).json({

@@ -13,6 +13,7 @@ services:
       - app-network  
     build: 
       context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     env_file:
@@ -20,7 +21,7 @@ services:
     depends_on:
       - redis
       - mysql
-    command: /bin/sh -c "npm run db:refresh && npm start"
+    command: ["/wait-for-it.sh", "hostmysql:3306", "--", "/bin/sh", "-c", "npm run db:refresh && npm start"]
 
   mysql:  
     mem_limit: 512mb 
@@ -31,7 +32,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
-      # Quiser criar um usuário regular adicional no MySQL (que não seja o root),
+       # Quiser criar um usuário regular adicional no MySQL (que não seja o root),
       # descomente as duas linhas abaixo e lembre-se de definir os valores no arquivo .env.
       # Por exemplo: DB_USER=myuser e DB_USER_PASSWORD=mypassword
       # MYSQL_USER: ${DB_USER}

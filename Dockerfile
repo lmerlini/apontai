@@ -15,11 +15,15 @@ RUN npm install
 # Instale o sequelize-cli globalmente
 RUN npm install -g sequelize-cli
 
+# Adicionando o wait-for-it script
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
 # Copie os arquivos e diretórios da sua aplicação para o container
 COPY . .
 
 # Informe a porta que a aplicação utiliza, não consegui ainda pegar a porta do .env
 EXPOSE 3000
 
-# Defina o comando para executar sua aplicação
+# O comando padrão está comentado, pois você está definindo o comando no docker-compose.yml
 # CMD ["node", "src/app.js"]
