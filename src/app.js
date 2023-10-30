@@ -12,6 +12,9 @@ const passport = require('./config/passport');
 const { ensureAuthenticated } = require('./middlewares/ensureAuthenticated');
 const cors = require('cors');
 
+const specs = require('../swagger')
+const swaggerUi = require('swagger-ui-express');
+
 /**
  * Create Express application.
  */
@@ -51,7 +54,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',  // Ensure HTTPS is used in production
-        maxAge: 1000 * 60 * 60 * 24 
+        maxAge: 1000 * 60 * 60 * 24
     }
 }));
 
@@ -64,15 +67,14 @@ app.use(passport.session());
 /**
  * Application routes.
  */
+app.use(`/${PREFIX}/docs`, swaggerUi.serve, swaggerUi.setup(specs));
 app.use(`/${PREFIX}/auth`, require('./routes/routesAuthenticate'));
-app.use(`/${PREFIX}/companies`, ensureAuthenticated, require('./routes/routeCompanies.js'))
+app.use(`/${PREFIX}/companies`, ensureAuthenticated, require('./routes/routesCompanies'))
 app.use(`/${PREFIX}/users`, ensureAuthenticated, require('./routes/routesUsers'));
 app.use(`/${PREFIX}/customers`, ensureAuthenticated, require('./routes/routesCustomers'));
 app.use(`/${PREFIX}/works`, ensureAuthenticated, require('./routes/routesWorks'));
 app.use(`/${PREFIX}/costs`, ensureAuthenticated, require('./routes/routesCosts'));
 app.use(`/${PREFIX}/projects`, ensureAuthenticated, require('./routes/routesProjects'))
-
-
 
 app.use(errorHandler);
 

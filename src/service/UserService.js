@@ -6,9 +6,6 @@ class UserService {
     this.repository = new UserRepository()
   }
 
-  async list() {
-    return await this.repository.list();
-  }
 
   /**
    * Register a new user. 
