@@ -16,7 +16,7 @@ class Company {
     }
 
     initializeRoutes() {
-       
+
         /**
           * @swagger
           * /companies/list:
@@ -118,6 +118,15 @@ class Company {
          *   delete:
          *     summary: Delete a company
          *     tags: [Companies]
+         *     security:
+         *       - bearerAuth: []
+         *     parameters:
+         *       - in: header
+         *         name: Authorization
+         *         schema:
+         *           type: string
+         *         required: true
+         *         description: JWT token        
          *     requestBody:
          *       required: true
          *       content:
@@ -173,8 +182,8 @@ class Company {
          */
         this.router.patch(`/update/:id`, this.controller.update);
 
-        this.router.use(`/*`, (_, res, next) => {
-            res.status(404).json({ "message": 'Página não encontrada!' });
+        this.router.use(`/*`, (_, res, next) => {   
+            next({ message: 'Pagina não encontrada', status: 404 })
         });
 
     }

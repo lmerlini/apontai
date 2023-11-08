@@ -10,6 +10,7 @@ class CompanyController {
             const companies = await this.service.list();
             res.status(200).json(companies);
         } catch (error) {
+            console.log(error);
             next(error)
         }
     }

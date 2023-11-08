@@ -24,7 +24,7 @@ class CustomerRoutes {
 
         // Middleware to handle 404 errors for customer routes.
         this.router.use(`/*`, (_, res, next) => {
-            res.status(404).json({ "message": 'Página não encontrada!' });
+            next({ message: 'Pagina não encontrada', status: 404 })
         });
     }
 }
