@@ -9,6 +9,10 @@ class CompanyService {
         return this.repository.findAll();
     }
 
+    async search(queryParams) {
+        return this.repository.search(queryParams);
+    }
+
     async create(data) {
         return this.repository.create(data);
     }

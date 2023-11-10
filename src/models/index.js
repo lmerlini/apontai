@@ -11,8 +11,6 @@ const Sequelize = require('sequelize');
 const sequelize = require('../config/connection');
 
 const basename = path.basename(__filename);
-const config = require(__dirname + '/../config/config.js')[process.env.NODE_ENV];
-
 const dbInstance = {};
 
 // Filter model files, excluding the current file and test files.

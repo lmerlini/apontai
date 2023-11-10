@@ -116,7 +116,7 @@ class UserRouter {
         this.router.delete(`/delete`, this.controller.delete);
 
         this.router.use(`/*`, (_, res, next) => {
-            res.status(404).json({ "message": 'Página não encontrada!' });
+            next({ message: 'Pagina não encontrada', status: 404 })
         });
 
     }

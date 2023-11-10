@@ -10,7 +10,17 @@ class CompanyController {
             const companies = await this.service.list();
             res.status(200).json(companies);
         } catch (error) {
+            console.log(error);
             next(error)
+        }
+    }
+
+    search = async (req, res, next) => {
+        try {
+            const searchResults = await this.service.search(req.query);
+            res.json(searchResults);
+        } catch (error) {
+            next(error);
         }
     }
 

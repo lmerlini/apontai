@@ -70,6 +70,15 @@ class Authenticate {
          *   post:
          *     summary: Refresh JWT token
          *     tags: [Authentication]
+         *     security:
+         *       - bearerAuth: []
+         *     parameters:
+         *       - in: header
+         *         name: Authorization
+         *         schema:
+         *           type: string
+         *         required: true
+         *         description: JWT token          
          *     requestBody:
          *       required: true
          *       content:
@@ -115,8 +124,7 @@ class Authenticate {
 
 
         this.router.use(`/*`, (_, res) => {
-            res.status(404).json({ "message": 'Página não encontrada!' });
-            return;
+            next({ message: 'Pagina não encontrada', status: 404 })
         });
     }
 

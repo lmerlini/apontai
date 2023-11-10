@@ -20,7 +20,7 @@ class ProjectRoutes {
         this.router.patch(`/update/:project_id`, this.controller.update);
 
         this.router.use(`/*`, (_, res, next) => {
-            res.status(404).json({ "message": 'Página não encontrada!' });
+            next({ message: 'Pagina não encontrada', status: 404 })
         });
     }
 }
