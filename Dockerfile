@@ -22,8 +22,11 @@ RUN chmod +x /wait-for-it.sh
 # Copie os arquivos e diretórios da sua aplicação para o container
 COPY . .
 
-# Informe a porta que a aplicação utiliza, não consegui ainda pegar a porta do .env
+# Informe a porta que a aplicação utiliza ...: não consegui ainda pegar a porta do .env
 EXPOSE 3000
+# porta do debugger
+EXPOSE 9229
 
+#Modifiquei para dentro do docker-compose COMMAND
 # O comando padrão está comentado, pois você está definindo o comando no docker-compose.yml
 # CMD ["node", "src/app.js"]

@@ -15,13 +15,14 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:3000" # Porta da aplicação
+      - "9229:9229" # Porta do debugger
     env_file:
       - .env    
     depends_on:
       - redis
-      - mysql
-    command: ["/wait-for-it.sh", "hostmysql:3306", "--", "/bin/sh", "-c", "npm run db:refresh && npm start"]
+      - mysql    
+    command: ["/wait-for-it.sh", "hostmysql:3306", "--", "/bin/sh", "-c", "npm run db:refresh && npm run start-debug"]
 
   mysql:  
     mem_limit: 512mb 

@@ -15,6 +15,15 @@ class CompanyController {
         }
     }
 
+    search = async (req, res, next) => {
+        try {
+            const searchResults = await this.service.search(req.query);
+            res.json(searchResults);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     create = async (req, res, next) => {
         try {
             const company = await this.service.create(req.body);
