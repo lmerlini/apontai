@@ -6,13 +6,97 @@ const ProjectController = require('../controllers/ProjectController');
  */
 class ProjectRoutes {
 
-
     constructor() {
         this.controller = new ProjectController();
         this.router = express.Router();
         this.initializeRoutes();
     }
 
+    /**
+     * @swagger
+     * /projects/list:
+     *   get:
+     *     summary: Get a list of projects
+     *     tags:
+     *       - Projects
+     *     security:
+     *       - bearerAuth: []
+     *     responses:
+     *       200:
+     *         description: Successful operation
+     */
+    /**
+     * @swagger
+     * /projects/create:
+     *   post:
+     *     summary: Create a new project
+     *     tags:
+     *       - Projects
+     *     security:
+     *       - bearerAuth: []
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               name:
+     *                 type: string
+     *               description:
+     *                 type: string
+     *     responses:
+     *       200:
+     *         description: Project created successfully
+     *       400:
+     *         description: Bad request
+     */
+    /**
+     * @swagger
+     * /projects/delete:
+     *   delete:
+     *     summary: Delete a project
+     *     tags:
+     *       - Projects
+     *     security:
+     *       - bearerAuth: []
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               project_id:
+     *                 type: string
+     *     responses:
+     *       200:
+     *         description: Project deleted successfully
+     *       400:
+     *         description: Bad request
+     */
+    /**
+     * @swagger
+     * /projects/update/{project_id}:
+     *   patch:
+     *     summary: Update a project
+     *     tags:
+     *       - Projects
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: project_id
+     *         required: true
+     *         description: ID of the project to update.
+     *         schema:
+     *           type: string
+     *     responses:
+     *       200:
+     *         description: Project updated successfully
+     *       400:
+     *         description: Bad request
+     */
     initializeRoutes() {
         this.router.get(`/list`, this.controller.list);
         this.router.post(`/create`, this.controller.create);
@@ -24,6 +108,7 @@ class ProjectRoutes {
         });
     }
 }
+
 /**
  * An instance of the ProjectRoutes's express.Router.
  * @type {express.Router}

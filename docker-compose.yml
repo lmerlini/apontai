@@ -22,7 +22,7 @@ services:
     depends_on:
       - redis
       - mysql    
-    command: ["/wait-for-it.sh", "hostmysql:3306", "--", "/bin/sh", "-c", "npm run db:refresh && npm run start-debug"]
+    command: ["/wait-for-it.sh", "hostmysql:3306", "--timeout=60", "--", "/bin/sh", "-c", "npm run db:refresh && npm run start"]
 
   mysql:  
     mem_limit: 512mb 
@@ -46,10 +46,10 @@ services:
   redis:
     mem_limit: 512mb 
     container_name: hostredis
-    image: "redis:alpine"
+    image: "redis:latest"
     networks:
       - app-network
-    command: redis-server --requirepass ${REDIS_PASSWORD}
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
 

@@ -2,7 +2,10 @@ const express = require('express');
 const AuthController = require('../controllers/AuthController');
 
 /**
- * Class representing the authentication routes.
+ * @swagger
+ * tags:
+ *   name: Authenticate
+ *   description: Operations related to Authenticate
  */
 class Authenticate {
 
@@ -21,7 +24,7 @@ class Authenticate {
          * /auth/login:
          *   post:
          *     summary: Log in a user
-         *     tags: [Authentication]
+         *     tags: [Authenticate]
          *     requestBody:
          *       required: true
          *       content:
@@ -46,7 +49,7 @@ class Authenticate {
          * /auth/verify-token:
          *   post:
          *     summary: Verify JWT token
-         *     tags: [Authentication]
+         *     tags: [Authenticate]
          *     security:
          *       - bearerAuth: []
          *     parameters:
@@ -69,7 +72,7 @@ class Authenticate {
          * /auth/refresh-token:
          *   post:
          *     summary: Refresh JWT token
-         *     tags: [Authentication]
+         *     tags: [Authenticate]
          *     security:
          *       - bearerAuth: []
          *     parameters:
@@ -104,7 +107,7 @@ class Authenticate {
         * /auth/logout:
         *   post:
         *     summary: Log out a user
-        *     tags: [Authentication]
+        *     tags: [Authenticate]
         *     security:
         *       - bearerAuth: []
         *     parameters:

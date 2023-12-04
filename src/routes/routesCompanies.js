@@ -2,7 +2,10 @@ const express = require('express');
 const CompanyController = require('../controllers/CompanyController.js');
 
 /**
- * Router for user related endpoints.
+ * @swagger
+ * tags:
+ *   name: Companies
+ *   description: Operations related to Companies
  */
 class Company {
 

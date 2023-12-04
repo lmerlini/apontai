@@ -12,6 +12,7 @@ const passport = require('./config/passport');
 const { ensureAuthenticated } = require('./middlewares/ensureAuthenticated');
 const cors = require('cors');
 
+
 const specs = require('../swagger')
 const swaggerUi = require('swagger-ui-express');
 

@@ -3,7 +3,10 @@ const UserController = require('../controllers/UserController');
 const AuthController = require('../controllers/AuthController')
 
 /**
- * Router for user related endpoints.
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Operations related to Users
  */
 class UserRouter {
 

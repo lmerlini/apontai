@@ -2,13 +2,15 @@ const express = require('express');
 const WorkController = require('../controllers/WorkController');
 
 /**
- * Router for work related endpoints.
+ * @swagger
+ * tags:
+ *   name: Work
+ *   description: Operations related to work
  */
 class WorkRoutes {
 
-
     /**
-     * Initializes a new instance of the workRouter class.
+     * Initializes a new instance of the WorkRouter class.
      */
     constructor() {
         this.controller = new WorkController();
@@ -16,6 +18,128 @@ class WorkRoutes {
         this.initializeRoutes();
     }
 
+    /**
+     * @swagger
+     * /works/list:
+     *   get:
+     *     summary: Get a list of work
+     *     tags: [Work]
+     *     security:
+     *       - bearerAuth: []
+     *     responses:
+     *       200:
+     *         description: Successful operation
+     */
+    /**
+     * @swagger
+     * /works/perdate:
+     *   get:
+     *     summary: Get work per date
+     *     tags: [Work]
+     *     security:
+     *       - bearerAuth: []
+     *     responses:
+     *       200:
+     *         description: Successful operation
+     */
+    /**
+     * @swagger
+     * /works/list/project/{project_id}:
+     *   get:
+     *     summary: Get work by project ID
+     *     tags: [Work]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: project_id
+     *         required: true
+     *         description: ID of the project to get work for.
+     *         schema:
+     *           type: string
+     *     responses:
+     *       200:
+     *         description: Successful operation
+     */
+    /**
+     * @swagger
+     * /works/create:
+     *   post:
+     *     summary: Create new work entry
+     *     tags: [Work]
+     *     security:
+     *       - bearerAuth: []
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               // Define properties based on your work model
+     *     responses:
+     *       200:
+     *         description: Work entry created successfully
+     *       400:
+     *         description: Bad request
+     */
+    /**
+     * @swagger
+     * /works/delete:
+     *   delete:
+     *     summary: Delete work entry
+     *     tags: [Work]
+     *     security:
+     *       - bearerAuth: []
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               // Define properties based on your work model
+     *     responses:
+     *       200:
+     *         description: Work entry deleted successfully
+     *       400:
+     *         description: Bad request
+     */
+    /**
+     * @swagger
+     * /works/update/{work_id}/{project_id}:
+     *   patch:
+     *     summary: Update work entry
+     *     tags: [Work]
+     *     security:
+     *       - bearerAuth: []
+     *     parameters:
+     *       - in: path
+     *         name: work_id
+     *         required: true
+     *         description: ID of the work entry to update.
+     *         schema:
+     *           type: string
+     *       - in: path
+     *         name: project_id
+     *         required: true
+     *         description: ID of the project for the work entry.
+     *         schema:
+     *           type: string
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               // Define properties based on your work model
+     *     responses:
+     *       200:
+     *         description: Work entry updated successfully
+     *       400:
+     *         description: Bad request
+     */
     initializeRoutes() {
         this.router.get(`/list`, this.controller.list);
         this.router.get(`/perdate`, this.controller.listPerDate);
@@ -29,8 +153,9 @@ class WorkRoutes {
         });
     }
 }
+
 /**
- * An instance of the UserRouter's express.Router.
+ * An instance of the WorkRouter's express.Router.
  * @type {express.Router}
  */
 module.exports = new WorkRoutes().router;
