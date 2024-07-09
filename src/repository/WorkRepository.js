@@ -1,4 +1,4 @@
-const { Work } = require('../models');
+const { Work, Project } = require('../models');
 const FieldsRepository = require('./FieldsRepository')
 
 
@@ -22,12 +22,30 @@ class WorkRepository {
      * @param {number} userId - ID of the user.
      * @returns {Promise<Array>} Array of work entries with the daily total included.
      */
-    async list(userId, params) {
+    async list(userId, params) {        
         const results = await this.model.findAll({
             where: { user_id: userId, ...params },
+            include: [{
+                model: Project,
+                as: 'project'
+            }],
             ... this.fields.getAttributes()
         });
 
+        return this.generateTotalDaily(results);
+    }
+
+    async listPerDate(userId, params) {
+        
+        const results = await this.model.findAll({
+            where: { user_id: userId, ...params },
+            include: [{
+                model: Project,
+                as: 'project'
+            }],
+            ... this.fields.getAttributes()
+        });
+    
         return this.generateTotalDaily(results);
     }
 

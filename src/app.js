@@ -76,6 +76,9 @@ app.use(`/${PREFIX}/customers`, ensureAuthenticated, require('./routes/routesCus
 app.use(`/${PREFIX}/works`, ensureAuthenticated, require('./routes/routesWorks'));
 app.use(`/${PREFIX}/costs`, ensureAuthenticated, require('./routes/routesCosts'));
 app.use(`/${PREFIX}/projects`, ensureAuthenticated, require('./routes/routesProjects'))
+app.use(`/${PREFIX}/accountables`, ensureAuthenticated, require('./routes/routesAccountables.js'))
+
+
 
 app.use(errorHandler);
 

@@ -29,8 +29,14 @@ class WorkRoutes {
      *     responses:
      *       200:
      *         description: Successful operation
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Work'
      */
-    /**
+       /**
      * @swagger
      * /works/perdate:
      *   get:
@@ -38,9 +44,32 @@ class WorkRoutes {
      *     tags: [Work]
      *     security:
      *       - bearerAuth: []
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:                  
+     *               startDate:
+     *                 type: string
+     *                 format: date
+     *                 description: Start date
+     *               endDate:
+     *                 type: string
+     *                 format: date
+     *                 description: End date
      *     responses:
      *       200:
      *         description: Successful operation
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Work'
+     *       400:
+     *         description: Bad request
      */
     /**
      * @swagger
@@ -60,6 +89,12 @@ class WorkRoutes {
      *     responses:
      *       200:
      *         description: Successful operation
+     *         content:
+     *           application/json:
+     *             schema:
+     *               type: array
+     *               items:
+     *                 $ref: '#/components/schemas/Work'
      */
     /**
      * @swagger
@@ -74,12 +109,14 @@ class WorkRoutes {
      *       content:
      *         application/json:
      *           schema:
-     *             type: object
-     *             properties:
-     *               // Define properties based on your work model
+     *             $ref: '#/components/schemas/Work'
      *     responses:
      *       200:
      *         description: Work entry created successfully
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Work'
      *       400:
      *         description: Bad request
      */
@@ -98,7 +135,10 @@ class WorkRoutes {
      *           schema:
      *             type: object
      *             properties:
-     *               // Define properties based on your work model
+     *               id:
+     *                 type: string
+     *                 description: ID of the work entry to delete.
+     *                 example: "1"
      *     responses:
      *       200:
      *         description: Work entry deleted successfully
@@ -131,12 +171,14 @@ class WorkRoutes {
      *       content:
      *         application/json:
      *           schema:
-     *             type: object
-     *             properties:
-     *               // Define properties based on your work model
+     *             $ref: '#/components/schemas/Work'
      *     responses:
      *       200:
      *         description: Work entry updated successfully
+     *         content:
+     *           application/json:
+     *             schema:
+     *               $ref: '#/components/schemas/Work'
      *       400:
      *         description: Bad request
      */
@@ -159,3 +201,50 @@ class WorkRoutes {
  * @type {express.Router}
  */
 module.exports = new WorkRoutes().router;
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Work:
+ *       type: object
+ *       properties:
+ *         user_id:
+ *           type: integer
+ *           description: ID of the user
+ *         project_id:
+ *           type: integer
+ *           description: ID of the project
+ *         name:
+ *           type: string
+ *           description: Name of the work entry
+ *         service_date:
+ *           type: string
+ *           format: date
+ *           description: Service date
+ *         start_time:
+ *           type: string
+ *           format: time
+ *           description: Start time
+ *         break_time:
+ *           type: integer
+ *           description: Break time in seconds
+ *         end_time:
+ *           type: string
+ *           format: time
+ *           description: End time
+ *         description:
+ *           type: string
+ *           description: Description of the work entry
+ *         status:
+ *           type: string
+ *           description: Status of the work entry
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: Creation timestamp
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: Update timestamp
+ */

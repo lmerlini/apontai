@@ -38,7 +38,7 @@ class WorkController {
     listPerDate = async (req, res, next) => {
         try {
             this._preprocessRequest(req);
-            const { startDate, endDate } = req.body;
+            const { startDate, endDate } = req.body;            
             const totalWork = await this.service.listPerDate(req.body.user_id, startDate, endDate);
             return res.status(200).json(totalWork);
         } catch (error) {

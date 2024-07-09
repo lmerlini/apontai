@@ -5,14 +5,14 @@ module.exports = (sequelize) => {
     class Accountable extends Model {
         static associate(models) {
             this.belongsTo(models.Customer, {
-                foreignKey: 'accountable_id',
+                foreignKey: 'customer_id', 
                 as: 'customer'
             });
         }
     }
 
     Accountable.init({
-        client_id: {
+        customer_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'customers',
@@ -47,4 +47,4 @@ module.exports = (sequelize) => {
         });
 
     return Accountable;
-}
+};

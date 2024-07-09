@@ -54,7 +54,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     name: DataTypes.STRING,
-    service_date: DataTypes.DATE,
+    service_date: DataTypes.DATEONLY,
     start_time: DataTypes.TIME,
     break_time: DataTypes.INTEGER,
     end_time: DataTypes.TIME,

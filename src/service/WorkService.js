@@ -52,11 +52,11 @@ class WorkService {
      * @returns {Promise<Array>} Array of work entries.
      */
     async listPerDate(userId, startDate, endDate) {
-        let result = await this.work.list(userId, {
+        let result = await this.work.listPerDate(userId, {
             service_date: {
                 [Op.between]: [new Date(startDate), new Date(endDate)]
             }
-        });
+        });        
         return result;
     }
 

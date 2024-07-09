@@ -7,7 +7,7 @@ module.exports = {
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
     dialect: 'mysql',
-    logging: process.env.SEQUELIZE_LOGGING_DEVELOPMENT === 'true'
+    logging: console.log
   },
   production: {
     username: process.env.DB_USERNAME,
